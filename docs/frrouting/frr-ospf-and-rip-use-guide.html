@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cách sử dụng FRRouting &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Cài đặt FRRouting từ binary" href="frr-install/frr-install-from-binary-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="frrouting.html">FRRouting Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="frr-install.html">Cài đặt FRRouting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cách sử dụng FRRouting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chuan-bi">Chuẩn bị</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ospf">OSPF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rip">RIP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="frrouting.html">FRRouting Explaination</a> &raquo;</li>
+        
+      <li>Cách sử dụng FRRouting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/frrouting/frr-ospf-and-rip-use-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cach-su-dung-frrouting">
+<h1>Cách sử dụng FRRouting<a class="headerlink" href="#cach-su-dung-frrouting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chuan-bi">
+<h2>Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>2 Máy ảo, cấu hình mỗi máy: 2 CPU, 2GB RAM, 2 card mạng (1 NAT và 1 private)</p></li>
+<li><p>Hệ điều hành: Ubuntu Server 18.04</p></li>
+<li><p>2 máy ảo đều đã được cài đặt FRRouting theo cách trong file frr-install-guide</p></li>
+</ul>
+</div>
+<div class="section" id="ospf">
+<h2>OSPF<a class="headerlink" href="#ospf" title="Permalink to this headline">¶</a></h2>
+<p>2 máy ảo chuẩn bị tương ứng với 2 router trong mô hình sau</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98120853-14c71b80-1ee1-11eb-8663-476ecfd7095c.png" />
+</div>
+<p>Để bật chế độ ospf, trên mỗi router, sửa “ofpfd=yes” trong file /etc/frr/daemons</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98121727-3ecd0d80-1ee2-11eb-9105-ffb94e913ada.png" />
+</div>
+<p>Restart frr để nhận thay đổi</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">restart</span> <span class="n">frr</span>
+</pre></div>
+</div>
+<p>Kiểm tra trạng thái của FRRouting bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">status</span> <span class="n">frr</span>
+</pre></div>
+</div>
+<p>Nếu kết quả trả về active (running) và có ofpfd tức là thành công</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98121440-df6efd80-1ee1-11eb-8493-f4e73f705e01.png" />
+</div>
+<p>Kiểm tra 2 router trước khi sử dụng ospf bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">nr</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98122090-b3a04780-1ee2-11eb-924e-dede1fdc2879.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98122141-c3b82700-1ee2-11eb-9d07-de85756a6f14.png" />
+</div>
+<p>Để vào frr, sử dụng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtysh</span>
+</pre></div>
+</div>
+<p>Tiến hành cấu hình router 1 như sau (router 2 tương tự)</p>
+<p>Vào config terminal của router bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>Vào chế độ ospf bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">router</span> <span class="n">ospf</span>
+</pre></div>
+</div>
+<p>Thêm 2 network cùng area 0 tương ứng với 2 card mạng như trong mô hình</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="mf">172.16</span><span class="o">.</span><span class="mf">69.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">area</span> <span class="mi">0</span>
+<span class="n">network</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">182.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">area</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Thoát config terminal bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">end</span>
+</pre></div>
+</div>
+<p>Tiến hành ospf route bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="n">ip</span> <span class="n">ospf</span> <span class="n">route</span>
+</pre></div>
+</div>
+<p>Router 1</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98196879-e20c3a00-1f57-11eb-8121-5e0a993e377c.png" />
+</div>
+<p>Router 2</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98196916-fe0fdb80-1f57-11eb-8046-67a526a5c56b.png" />
+</div>
+<p>Kết quả cho thấy 2 router đã trao đổi bảng định tuyến với nhau.</p>
+<p>Sau khi thực hiện trao đổi bảng định tuyến, kiểm tra lại 2 router bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">nr</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98124054-4215c880-1ee5-11eb-9bc5-c1ea9f516bb1.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98124160-62458780-1ee5-11eb-9434-9b26d4a1f0d6.png" />
+</div>
+<p>Để loại bỏ đi các network vừa thêm, sử dụng cú pháp</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">no</span> <span class="n">network</span> <span class="o">&lt;</span><span class="n">network</span><span class="o">&gt;</span> <span class="n">area</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Tiến hành ospf route lại như sau</p>
+<p>Router 1</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98196989-2dbee380-1f58-11eb-9941-b47dddf64002.png" />
+</div>
+<p>Router 2</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98197025-43340d80-1f58-11eb-8fe0-5a82c8e6ee63.png" />
+</div>
+<p>Kiểm tra lại 2 router bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">nr</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98124965-6e7e1480-1ee6-11eb-9044-3beaa4361bac.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98125048-86559880-1ee6-11eb-86f1-226e50702bf2.png" />
+</div>
+</div>
+<div class="section" id="rip">
+<h2>RIP<a class="headerlink" href="#rip" title="Permalink to this headline">¶</a></h2>
+<p>2 máy ảo chuẩn bị tương ứng với 2 router trong mô hình sau</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98120853-14c71b80-1ee1-11eb-8663-476ecfd7095c.png" />
+</div>
+<p>Tương tự với ospf, để bật rip, trên 2 router sửa “ripd=yes” trong file /etc/frr/daemons, sau đó restart frr và kiểm tra trạng thái của frr bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">status</span> <span class="n">frr</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98125414-08de5800-1ee7-11eb-97f9-233d5fd635cd.png" />
+</div>
+<p>Vào frr bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vtysh</span>
+</pre></div>
+</div>
+<p>Cấu hình rip router 1 (router 2 tương tự). Để vào chế độ config, sử dụng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>Để cấu hình router rip, sử dụng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">router</span> <span class="n">rip</span>
+</pre></div>
+</div>
+<p>Router 1 có 2 card mạng như trong mô hình, vì vậy thêm 2 network tương ứng trên router 1 như sau:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="mf">172.16</span><span class="o">.</span><span class="mf">69.0</span><span class="o">/</span><span class="mi">24</span>
+<span class="n">network</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">182.0</span><span class="o">/</span><span class="mi">24</span>
+</pre></div>
+</div>
+<p>Thoát ra bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">end</span>
+</pre></div>
+</div>
+<p>Ghi lại cấu hình vào file /etc/frr/frr.conf bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">write</span>
+</pre></div>
+</div>
+<p>Làm tương tự trên router 2, ta được như sau</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98127289-198fcd80-1ee9-11eb-9119-29a7d47a9e62.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98127411-4348f480-1ee9-11eb-9a4c-880b6a68a315.png" />
+</div>
+<p>2 file /etc/frr/frr.conf lần lượt trên router 1 và router 2 có dạng như sau</p>
+<p>Router 1</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98127620-7c816480-1ee9-11eb-9298-5b2b4b4dacc4.png" />
+</div>
+<p>Router 2</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98127793-acc90300-1ee9-11eb-9af4-da2a4dfdbc17.png" />
+</div>
+<p>Kiểm tra lại 2 router bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">netstat</span> <span class="o">-</span><span class="n">nr</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98192816-580ba380-1f4e-11eb-9f11-8f73418f9ddf.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98192898-8a1d0580-1f4e-11eb-8a30-d6eecb5d6e9c.png" />
+</div>
+<p>Để loại bỏ cấu hình rip, ta xoá các network vừa thêm trên các router, ta sử dụng cú pháp</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">no</span> <span class="n">network</span> <span class="o">&lt;</span><span class="n">network</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Router 1</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98194103-37911880-1f51-11eb-9fc7-2d6e747d1ba4.png" />
+</div>
+<p>Router 2</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98194168-51326000-1f51-11eb-9d0c-15424e0b49c7.png" />
+</div>
+<p>Kiểm tra lại 2 router bằng lệnh</p>
+<p>netstat -nr</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98194247-83dc5880-1f51-11eb-9d8e-379a7ace91e4.png" />
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98194297-a0789080-1f51-11eb-91ec-04278e857f2e.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="frr-install/frr-install-from-binary-guide.html" class="btn btn-neutral float-left" title="Cài đặt FRRouting từ binary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

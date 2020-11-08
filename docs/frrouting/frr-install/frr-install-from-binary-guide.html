@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cài đặt FRRouting từ binary &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cách sử dụng FRRouting" href="../frr-ospf-and-rip-use-guide.html" />
+    <link rel="prev" title="Cài đặt FRRouting từ source" href="frr-install-from-source-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../frrouting.html">FRRouting Explaination</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../frr-install.html">Cài đặt FRRouting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="frr-install-from-source-guide.html">Cài đặt FRRouting từ source</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cài đặt FRRouting từ binary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#chuan-bi">Chuẩn bị</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cai-dat-tren-ubuntu">Cài đặt trên Ubuntu</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../frr-ospf-and-rip-use-guide.html">Cách sử dụng FRRouting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../frrouting.html">FRRouting Explaination</a> &raquo;</li>
+        
+          <li><a href="../frr-install.html">Cài đặt FRRouting</a> &raquo;</li>
+        
+      <li>Cài đặt FRRouting từ binary</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/frrouting/frr-install/frr-install-from-binary-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cai-dat-frrouting-tu-binary">
+<h1>Cài đặt FRRouting từ binary<a class="headerlink" href="#cai-dat-frrouting-tu-binary" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="chuan-bi">
+<h2>Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Máy ảo cấu hình: 2 CPU 2GB RAM 2 card mạng (1 NAT và 1 private)</p></li>
+<li><p>Hệ điều hành: Ubuntu Server 18.04</p></li>
+<li><p>Máy ảo có kết nối internet</p></li>
+</ul>
+</div>
+<div class="section" id="cai-dat-tren-ubuntu">
+<h2>Cài đặt trên Ubuntu<a class="headerlink" href="#cai-dat-tren-ubuntu" title="Permalink to this headline">¶</a></h2>
+<p>Chạy lệnh sau để cài đặt FRRouting</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo apt install -y curl
+sudo apt update -y
+sudo apt install -y gnupg2
+# add GPG key
+curl -s https://deb.frrouting.org/frr/keys.asc | sudo apt-key add -
+# possible values for FRRVER: frr-6 frr-7 frr-stable
+# frr-stable will be the latest official stable release
+FRRVER=&quot;frr-stable&quot;
+echo deb https://deb.frrouting.org/frr $(lsb_release -s -c) $FRRVER | sudo tee -a /etc/apt/sources.list.d/frr.list
+# update and install FRR
+sudo apt update -y &amp;&amp; sudo apt install -y frr frr-pythontools
+</pre></div>
+</div>
+<p>Sửa file /etc/sysctl.conf</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118250-8a30ed00-1edd-11eb-8faa-62c34840b52a.png" />
+</div>
+<p>Sử dụng lệnh sau để đọc lại file sysctl.conf</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118342-ac2a6f80-1edd-11eb-9148-5e0ace19a8fe.png" />
+</div>
+<p>Kiểm tra trạng thái của FRRouting bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">status</span> <span class="n">frr</span>
+</pre></div>
+</div>
+<p>Nếu kết quả trả về active (running) tức là thành công</p>
+<div class="figure align-default">
+<img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118535-f0b60b00-1edd-11eb-9110-ea54da7f0f47.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../frr-ospf-and-rip-use-guide.html" class="btn btn-neutral float-right" title="Cách sử dụng FRRouting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="frr-install-from-source-guide.html" class="btn btn-neutral float-left" title="Cài đặt FRRouting từ source" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

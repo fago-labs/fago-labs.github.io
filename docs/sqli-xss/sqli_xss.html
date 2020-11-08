@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Demo SQL Injection và Cross-site Scripting &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Demo SQL Injection và Cross-site Scripting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/sqli-xss/sqli_xss.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="demo-sql-injection-va-cross-site-scripting">
+<h1>Demo SQL Injection và Cross-site Scripting<a class="headerlink" href="#demo-sql-injection-va-cross-site-scripting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gioi-thieu-ve-sql-injection-va-cross-site-scripting">
+<h2>1. Giới thiệu về SQL Injection và Cross-site Scripting<a class="headerlink" href="#gioi-thieu-ve-sql-injection-va-cross-site-scripting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sql-injection">
+<h3>1.1. SQL Injection<a class="headerlink" href="#sql-injection" title="Permalink to this headline">¶</a></h3>
+<p>SQL Injection là một kỹ thuật lợi dụng những lỗ hổng kiểm tra dữ liệu đầu vào của các ứng dụng web. Kỹ thuật này được thực hiện bằng cách chèn thêm một đoạn SQL để làm sai lệnh đi câu truy vấn ban đầu, từ đó có thể khai thác dữ liệu từ database. SQL injection có thể cho phép hacker thực hiện các thao tác như một người quản trị web, trên cơ sở dữ liệu của ứng dụng.</p>
+<p>Ví dụ trong form đăng nhập của trang web, thay vì nhập username và password thông thường, hacker sẽ chèn thêm những câu lệnh SQL bất hợp pháp để lấy dữ liệu của người dùng hoặc dữ liệu database.</p>
+<p>SQL Injectiton có thể gây ra:</p>
+<ul class="simple">
+<li><p>Hack tài khoản cá nhân</p></li>
+<li><p>Đánh cắp, sao chép dữ liệu</p></li>
+<li><p>Thay đổi cấu trúc hoặc xóa cơ sở dữ liệu hệ thống</p></li>
+<li><p>Hacker có thể đăng nhập với tư cách người dùng khác, thậm chí là quản trị viên</p></li>
+<li><p>Đánh cắp thông tin cá nhân người dùng</p></li>
+</ul>
+</div>
+<div class="section" id="cross-site-scripting">
+<h3>1.2. Cross-site Scripting<a class="headerlink" href="#cross-site-scripting" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="demo">
+<h2>2. Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chuan-bi">
+<h3>2.1. Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Hệ điều hành: Ubuntu 20.04 Desktop</p></li>
+<li><p>Github</p></li>
+<li><p>Acunetix</p></li>
+<li><p>Sqlmap</p></li>
+<li><p>Burp Suite</p></li>
+</ul>
+</div>
+<div class="section" id="cai-dat-acunetix">
+<h3>Cài đặt Acunetix<a class="headerlink" href="#cai-dat-acunetix" title="Permalink to this headline">¶</a></h3>
+<p>Pull repo bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neolead</span><span class="o">/</span><span class="n">acunetix</span><span class="o">-</span><span class="n">linux</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Login với quyền <strong>root</strong>, chạy lệnh sau để cài Acunetix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>apt install unzip curl ; rm -rf /tmp/acun*
+apt install libxdamage1 libgtk-3-0 libasound2 libnss3 libxss1 libx11-xcb1 -y
+cd /tmp; rm master.zip -f
+curl -L -o master.zip http://github.com/neolead/acunetix-linux/zipball/master/
+unzip master.zip
+cd `ls|grep neolead` &amp;&amp; cat acupatch* &gt; acupatch.tgz
+tar -zxvf acupatch.tgz
+chmod +x ./acunetix_trial.sh
+./acunetix_trial.sh
+service acunetix_trial stop
+chmod 0755 patch_awvs
+cp patch_awvs /home/acunetix/.acunetix_trial/v_190515149/scanner/
+su - acunetix -c &quot;/home/acunetix/.acunetix_trial/v_190515149/scanner/patch_awvs&quot;
+cd /tmp;rm -rf /tmp/acu*
+service acunetix_trial stop
+chattr +i /home/acunetix/.acunetix_trial/data/license/license_info.json
+service acunetix_trial start
+curl -k https://127.0.0.1:13443
+su - acunetix -c &quot;/home/acunetix/.acunetix_trial/ &amp;&amp; bash change_credentials.sh&quot;
+</pre></div>
+</div>
+<p>Sau khi cài đặt xong, truy cập vào Acunetix qua địa chỉ https://127.0.0.1:13443</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-24-43" src="https://user-images.githubusercontent.com/32956424/97102211-40265b00-16d6-11eb-8cb0-1a093ffe2cdc.png" /></p>
+</div>
+<div class="section" id="cai-dat-burp-suite">
+<h3>Cài đặt Burp Suite<a class="headerlink" href="#cai-dat-burp-suite" title="Permalink to this headline">¶</a></h3>
+<p>Burp Suite được viết bằng ngôn ngữ Java. Do đó, máy tính cần được cài đặt Java nếu muốn sử dụng Burp Suite</p>
+<p>Nếu máy tính chưa được cài đặt Java, chạy lệnh sau</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">default</span><span class="o">-</span><span class="n">jre</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">default</span><span class="o">-</span><span class="n">jdk</span>
+</pre></div>
+</div>
+<p>Truy cập vào link http://portswigger.net/burp/download.html để download Burp Suite. Sau khi download, chạy file .JAR này để bắt đầu.</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-23-17" src="https://user-images.githubusercontent.com/32956424/97102218-503e3a80-16d6-11eb-8cd4-6025ae60c7f9.png" /></p>
+<p>Chọn next để tiếp tục</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-23-42" src="https://user-images.githubusercontent.com/32956424/97102226-5f24ed00-16d6-11eb-86b0-d4bc1c998f2d.png" /></p>
+<p>Chọn next để tiếp tục</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-23-46" src="https://user-images.githubusercontent.com/32956424/97102231-6a781880-16d6-11eb-9fd5-40faab0dc669.png" /></p>
+<p>Giao diện của Burp Suite</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-24-04" src="https://user-images.githubusercontent.com/32956424/97102238-7368ea00-16d6-11eb-83f1-8db17190d5f8.png" /></p>
+<p>Burp được thiết kế để sử dụng cùng với trình duyệt. Hoạt động giống như một HTTP proxy server, tất cả HTTP và HTTPS traffic đều sẽ đi qua Burp. Trước khi tiến hành làm việc với Burp, cần cấu hình để trình duyệt để làm việc với Burp</p>
+<p>Tại giao diện của Burp Suite, chọn <strong>Proxy</strong> -&gt; <strong>Option</strong>. Trong phần <strong>Proxy Listener</strong>, kiểm tra xem checkbox Running đã được chọn hay chưa, và Interface là 127.0.0.1:8080. Nếu các thông tin không đúng như trên, Add 1 proxy với IP và Port là 127.0.0.1:8080</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-39-16" src="https://user-images.githubusercontent.com/32956424/97102457-474e6880-16d8-11eb-84b3-932dc27703dd.png" /></p>
+<p>Cần cấu hình trình duyệt để thay đổi proxy. Click vào <strong>Preference</strong> -&gt; <strong>Network Setting</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-15-43-14" src="https://user-images.githubusercontent.com/32956424/97102530-d8254400-16d8-11eb-9cbb-578db11aff22.png" /></p>
+<p>Chọn <strong>Manual Proxy Configuration</strong> và điền IP <strong>127.0.0.1</strong> và Port <strong>8080</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-15-43-18" src="https://user-images.githubusercontent.com/32956424/97102564-21759380-16d9-11eb-8e4d-028305e0ac6d.png" /></p>
+</div>
+<div class="section" id="cai-dat-sql-map">
+<h3>Cài đặt SQL MAP<a class="headerlink" href="#cai-dat-sql-map" title="Permalink to this headline">¶</a></h3>
+<p>Cần cài đặt Python trước để có thể sử dụng sqlmap</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">sqlmap</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="demo-sql-injection">
+<h3>2.2. Demo SQL Injection<a class="headerlink" href="#demo-sql-injection" title="Permalink to this headline">¶</a></h3>
+<p>Cài đặt website demo của OWASP</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="mi">80</span><span class="p">:</span><span class="mi">80</span> <span class="o">-</span><span class="n">p</span> <span class="mi">443</span><span class="p">:</span><span class="mi">443</span> <span class="o">--</span><span class="n">name</span> <span class="n">owasp17</span> <span class="n">bltsec</span><span class="o">/</span><span class="n">mutillidae</span><span class="o">-</span><span class="n">docker</span>
+</pre></div>
+</div>
+<p>Truy cập vào trang chủ qua địa chỉ http://127.0.0.1/mutillidae/</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-55-02" src="https://user-images.githubusercontent.com/32956424/97102727-76fe7000-16da-11eb-81a9-a130dc34b3ae.png" /></p>
+<p>Truy cập vào trang login của Mutillidae</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-56-52" src="https://user-images.githubusercontent.com/32956424/97102779-e5dbc900-16da-11eb-97cb-b2678dba3160.png" /></p>
+<p>Sử dụng Acunetix để scan các lỗ hổng. Bằng cách tạo 1 target để scan, nhập URL trang login của Mutillidae</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-57-01" src="https://user-images.githubusercontent.com/32956424/97102809-20456600-16db-11eb-8ad2-f0faa21a9b64.png" /></p>
+<p>Click vào nút <strong>Scan</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-15-57-10" src="https://user-images.githubusercontent.com/32956424/97102817-2d625500-16db-11eb-84b7-d1cd443d3486.png" /></p>
+<p>Tại đây có thể tùy chọn Full scan hoặc Scan một lỗ hổng cụ thể</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-57-15" src="https://user-images.githubusercontent.com/32956424/97102825-3e12cb00-16db-11eb-9c4c-9986816dbf90.png" /></p>
+<p>Quá trình scan sẽ cho thấy mức độ threat</p>
+<p><img alt="ubuntu20 04-2020-10-25-15-57-43" src="https://user-images.githubusercontent.com/32956424/97102830-4965f680-16db-11eb-8310-0f90ecff8e13.png" /></p>
+<p>Như vậy là Website có lỗ hổng SQL Injection để khai thác. Thử nhập chuỗi <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">OR</span> <span class="pre">1=1;</span> <span class="pre">#</span></code> vào ô username</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-03-16" src="https://user-images.githubusercontent.com/32956424/97102891-c5f8d500-16db-11eb-8e02-434d9b6c0c21.png" /></p>
+<p>Click View Account Details. Như vậy là đã lấy được toàn bộ thông tin user trong bảng accounts của database</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-03-31" src="https://user-images.githubusercontent.com/32956424/97102893-cc874c80-16db-11eb-973b-26693d0f4e7c.png" /></p>
+<p>Chuyển sang trang <code class="docutils literal notranslate"><span class="pre">mutillidae/index.php?page=sqlmap-targets.php</span></code> , vào mục View Someones Blog</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-06-46" src="https://user-images.githubusercontent.com/32956424/97102975-62bb7280-16dc-11eb-9f44-6794ee1220cd.png" /></p>
+<p>Trong mục này người dùng có thể xem được blog của bất kỳ ai</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-06-53" src="https://user-images.githubusercontent.com/32956424/97102982-74047f00-16dc-11eb-8874-e4fec3b7f9eb.png" /></p>
+<p>Trong Burp Suite, chuyển <strong>Intercept</strong> từ <strong>off</strong> sang <strong>on</strong> để có thể bắt các dữ liệu</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-07-00" src="https://user-images.githubusercontent.com/32956424/97102991-88e11280-16dc-11eb-90fe-2cbfd95a2a7e.png" /></p>
+<p>Khi một người click vào xem blog của bất kỳ ai đó, thì Burp Suite sẽ chặn lại request đó lại, người sử dụng Burp Suite có thể xem, chỉnh sửa request</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-07-34" src="https://user-images.githubusercontent.com/32956424/97103059-e1b0ab00-16dc-11eb-9c56-b349d7d2760d.png" /></p>
+<p>Tiến hành copy toàn bộ request và paste vào một file txt</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-07-54" src="https://user-images.githubusercontent.com/32956424/97103073-eecd9a00-16dc-11eb-9840-7dfb1d6d7587.png" /></p>
+<p><img alt="ubuntu20 04-2020-10-25-16-08-24" src="https://user-images.githubusercontent.com/32956424/97103081-f55c1180-16dc-11eb-9f0f-1857379091d4.png" /></p>
+<p>Chạy SQLMap, với input là file sample.txt vừa tạo ở trên, chạy lệnh:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">./</span><span class="n">sqlmap</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">sonvuduc</span><span class="o">/</span><span class="n">sample</span><span class="o">.</span><span class="n">txt</span> <span class="o">--</span><span class="n">dbs</span>
+</pre></div>
+</div>
+<p>Các database của web sẽ hiện ra</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-16-50" src="https://user-images.githubusercontent.com/32956424/97103218-9d71da80-16dd-11eb-8e02-d58d58ed887a.png" /></p>
+<p>Có thể xem chi tiết các bảng của 1 database cụ thể bằng lệnh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqlmap</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">sonvuduc</span><span class="o">/</span><span class="n">sample</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">D</span> <span class="n">nowasp</span> <span class="o">--</span><span class="n">tables</span>
+</pre></div>
+</div>
+<p><img alt="ubuntu20 04-2020-10-25-16-17-16" src="https://user-images.githubusercontent.com/32956424/97103233-b7132200-16dd-11eb-825d-b41be5585839.png" /></p>
+<p>Xem chi tiết từng cột, thông tin trong bảng, ví dụ như bảng credit_cards:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqlmap</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">sonvuduc</span><span class="o">/</span><span class="n">sample</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">D</span> <span class="n">nowasp</span> <span class="o">-</span><span class="n">T</span> <span class="n">credit_cards</span> <span class="o">--</span><span class="n">columns</span> <span class="o">-</span><span class="n">C</span> <span class="n">ccid</span><span class="p">,</span><span class="n">ccnumber</span><span class="p">,</span><span class="n">ccv</span><span class="p">,</span><span class="n">expiration</span> <span class="o">--</span><span class="n">dump</span>
+</pre></div>
+</div>
+<p><img alt="ubuntu20 04-2020-10-25-16-20-26" src="https://user-images.githubusercontent.com/32956424/97103275-02c5cb80-16de-11eb-90ef-355e4b4ad33c.png" /></p>
+</div>
+<div class="section" id="demo-cross-site-scripting">
+<h3>2.3. Demo Cross-site Scripting<a class="headerlink" href="#demo-cross-site-scripting" title="Permalink to this headline">¶</a></h3>
+<p>Truy cập vào trang XSS -&gt; DNS Lookup của Mutillidae</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-22-29" src="https://user-images.githubusercontent.com/32956424/97103410-e24a4100-16de-11eb-9a12-f4eeeb2c0a46.png" /></p>
+<p>Khi một người nhập hostname hoặc IP và click Lookup DNS, Burp Suite sẽ bắt được dữ liệu</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-24-28" src="https://user-images.githubusercontent.com/32956424/97103454-30f7db00-16df-11eb-9add-2ae8ad283360.png" /></p>
+<p>Click chuột phải vào request và chọn <strong>Send to Repeater</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-16-24-36" src="https://user-images.githubusercontent.com/32956424/97103473-51279a00-16df-11eb-805b-8503d19caa3c.png" /></p>
+<p>Vào tab <strong>Repeater</strong> và chọn <strong>Params</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-16-24-44" src="https://user-images.githubusercontent.com/32956424/97103496-6b617800-16df-11eb-8305-0b707eab292c.png" /></p>
+<p>Double click và chỉnh sửa <strong>www.google.com</strong> thành <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;Alert(&quot;Hello&quot;)&lt;/script&gt;</span></code></p>
+<p><img alt="ubuntu20 04-2020-10-25-16-25-09" src="https://user-images.githubusercontent.com/32956424/97103525-977cf900-16df-11eb-880d-c9e2d29ccbc0.png" /></p>
+<p>Click <strong>Send</strong>, server sẽ trả về 1 repsonse</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-25-25" src="https://user-images.githubusercontent.com/32956424/97103537-a95e9c00-16df-11eb-8bac-305b62a912ee.png" /></p>
+<p>Click chuột phải vào response. Chọn <strong>Show response in browser</strong></p>
+<p><img alt="ubuntu20 04-2020-10-25-16-25-25" src="https://user-images.githubusercontent.com/32956424/97103570-d8750d80-16df-11eb-8d60-079a20340291.png" /></p>
+<p>Copy link và paste vào trình duyệt</p>
+<p><img alt="ubuntu20 04-2020-10-25-16-25-45" src="https://user-images.githubusercontent.com/32956424/97103574-e460cf80-16df-11eb-85aa-fcddab224f25.png" /></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

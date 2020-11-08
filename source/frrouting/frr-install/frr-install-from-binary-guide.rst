@@ -1,11 +1,11 @@
-Cách cài đặt FRRouting
-======================
+Cài đặt FRRouting từ binary
+================================
 
-Yêu cầu phần cứng
+Chuẩn bị
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -   Máy ảo cấu hình: 2 CPU 2GB RAM 2 card mạng (1 NAT và 1 private)
 -   Hệ điều hành: Ubuntu Server 18.04
--   Có kết nối internet
+-   Máy ảo có kết nối internet
 
 Cài đặt trên Ubuntu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

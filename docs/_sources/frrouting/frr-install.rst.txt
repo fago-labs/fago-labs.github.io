@@ -3,32 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to fago-labs-blog's documentation!
-==========================================
-
-.. toctree::
-   :maxdepth: 2
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-Open vSwitch
+Cài đặt FRRouting
 ==================
 
 .. toctree::
    :maxdepth: 2
 
-   ovs/ovs
-
-FRRouting
-==================
+   frr-install/frr-install-from-source-guide
 
 .. toctree::
    :maxdepth: 2
 
-   frrouting/frrouting
+   frr-install/frr-install-from-binary-guide
    
