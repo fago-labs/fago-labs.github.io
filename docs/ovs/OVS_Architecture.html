@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OVS Architecture &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>OVS Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/ovs/OVS_Architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ovs-architecture">
+<h1>OVS Architecture<a class="headerlink" href="#ovs-architecture" title="Permalink to this headline">¶</a></h1>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-19.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-19.png" />
+</div>
+<p>OVS thường được sử dụng để kết nối nhiều VM/container trong một host. Nó quản lý cả cổng vật lý - physical port (ví dụ: eth0, eth1) và cổng ảo virtual port (tap devices of VMs).</p>
+<p>Hình trên, OVS bao gồm ba thành phần:</p>
+<p><strong>vswitchd</strong></p>
+<ul class="simple">
+<li>user space program, ovs deamon</li>
+<li>tools: ovs-appctl</li>
+</ul>
+<p><strong>ovsdb-server</strong></p>
+<ul class="simple">
+<li>user space program, database server of OVS</li>
+<li>tools: ovs-vsctl, ovs-ofctl</li>
+</ul>
+<p><strong>kernel module (datapath)</strong></p>
+<ul class="simple">
+<li>kernel space module, OVS packet forwarder</li>
+<li>tools: ovs-dpctl</li>
+</ul>
+<p>vswitchd là main deamon process của OVS, ovsdb-server là database server của OVS và datapath là một kernel module thực hiện chuyển tiếp gói platform-dependent. Sau khi OVS khởi động, chúng ta có thể thấy hai dịch vụ: ovs-vswitchd và ovsdb-server:</p>
+<p>ovs-ovswitchd nhận OpenFlow messages từ OpenFlow controller và OVSDB-protocol định dạng messages từ ovsdb-server. Giao tiếp giữa ovs-vswitchd và datapath thông qua netlink (một dòng socket tương tự như Unix Domain Socket).</p>
+<p>Một hình minh họa khác chi tiết hơn:</p>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-36.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-36.png" />
+</div>
+<div class="section" id="vswitchd">
+<h2>1. vswitchd<a class="headerlink" href="#vswitchd" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="vswitchd-overview">
+<h2>1.1. vswitchd Overview<a class="headerlink" href="#vswitchd-overview" title="Permalink to this headline">¶</a></h2>
+<p>ovs-vswitchd nằm ở vị trí quan trọng của OVS, cần tương tác với OpenFlow controller, OVSDB, và kernel module.</p>
+<ul class="simple">
+<li>ovs-vswitchd giao tiếp với:</li>
+<li><ul class="first">
+<li>outside world sử dụng OpenFlow</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>ovsdb-server sử dụng giao thức OVSDB protocol</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>kernel thông qua netlink (tương tự như Unix socket domain)</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>system thông qua abstract interface là netdev</li>
+</ul>
+</li>
+<li>Triển khai mirroring, bonding, và VLANs</li>
+<li>Công cụ CLI: ovs-ofctl, ovs-appctl</li>
+</ul>
+<p>vswitch module được chia thành nhiều submodules/libraies:</p>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-44.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-44.png" />
+</div>
+<ul class="simple">
+<li>ovs-vswitchd: vswitchd daemon</li>
+<li>ofproto: library định nghĩa (abstracts) ovs bridge</li>
+<li>ofproto-provider: interface điều khiển loại OpenFlow switch cụ thể</li>
+<li>netdev: library định nghĩa (abstracts) network devices</li>
+<li>netdev-provider:  OS- and hardware-specific interface to network devices</li>
+</ul>
+</div>
+<div class="section" id="key-data-structures">
+<h2>1.2.  Key Data Structures<a class="headerlink" href="#key-data-structures" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-55.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-55.png" />
+</div>
+<ul class="simple">
+<li>OVS bridges quản lý hai loại tài nguyên:</li>
+<li><ul class="first">
+<li>forwarding plane mà nó điều khiển (datapath)</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>(physical and virtual) network devices được gắn vào nó (netdev)</li>
+</ul>
+</li>
+<li>Các cấu trúc dữ liệu chính:</li>
+<li><ul class="first">
+<li>Triển khai OVS bridge     :ofproto, ofproto-provider</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>để quản lý đường datapath : dpif, dpif-provider</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>để quản lý network device : netdev, netdev-provider</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ofproto">
+<h2>1.2.1. ofproto<a class="headerlink" href="#ofproto" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-14.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-14.png" />
+</div>
+<ul class="simple">
+<li>struct ofproto abstracts OpenFlow switches. Một ofproto instance là một OpenFlow switch (bridge).</li>
+<li>Data Structures (ofproto/ofproto-provider.h):</li>
+<li><ul class="first">
+<li>struct ofproto: thể hiện một OpenFlow switch (ovs bridge), tất cả flow/port được thực hiện trên ofproto</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>struct ofport: thể hiện một port trong một ofproto</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>struct rule: thể hiện một OpenFlow flow trong một ofproto</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>struct ofgroup: thể hiện OpenFlow 1.1+ group trong một ofproto</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ofproto-provider">
+<h2>1.2.2. ofproto-provider<a class="headerlink" href="#ofproto-provider" title="Permalink to this headline">¶</a></h2>
+<p>ofproto class structure, được xác định bởi mỗi một triển khai của ofproto (ovs bridge).</p>
+<p>Một ofproto provider là những gì ofproto sử dụng để giám sát và điều khiển trực tiếp một OpenFlow-capable switch. struct ofproto_class, trong ofproto / ofproto-provider.h, xác định các giao diện để triển khai một ofproto provider cho phần cứng hoặc phần mềm mới.</p>
+<p>Open vSwitch có built-in ofproto provider tên là ofproto-dpif, được xây dựng ở phía trên để thao tác các datapath, được gọi là dpif. “datapath” là một flow table đơn giản.Khi một gói đến. datapath tìm kiếm nó trong flow table. Nếu có một kết quả phù hợp, thì nó sẽ thực hiện các hành động liên quan. Nếu không có kết quả phù hợp, datapath sẽ chuyển gói đến ofproto-dpif, nơi mà duy trì toàn bộ bảng luồng OpenFlow. Nếu gói phù hợp trong bảng luồng này, thì ofproto-dpif thực thi các hành động của nó và chèn một mục mới vào flow table của dpif. (Nếu không, ofproto-dpif chuyển gói đến ofproto để gửi gói OpenFlow controller, nếu như nó được cấu hình.)</p>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-25.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-25.png" />
+</div>
+</div>
+<div class="section" id="netdev">
+<h2>1.2.3. netdev<a class="headerlink" href="#netdev" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Open vSwitch library, định nghĩa trong lib/netdev-provider.h, triển khai trong lib/netdev.c, xác định cách tương tác với các network devices, nghĩa là Ethernet interfaces.</li>
+<li>Mỗi porttrên switch phải có một netdev tương ứng</li>
+</ul>
+</div>
+<div class="section" id="netdev-provider">
+<h2>1.2.4. netdev-provider<a class="headerlink" href="#netdev-provider" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-35.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-35.png" />
+</div>
+<p>netdev provider triển khai OS- and hardware-specific interface to “network devices”, và ethernet device. Open vSwitch cần phải có khả năng mở mỗi port trên switch dưới dạng netdev, vì thế cần triển khai “netdev provider” hoạt động với hardware và software của switch.</p>
+<p><strong>Tất cả các loại class của netdev:</strong></p>
+<ul class="simple">
+<li>linux netdev (lib/netdev-linux.c, for linux platform)</li>
+<li><ul class="first">
+<li>system - netdev_linux_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>tap - netdev_tap_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>internal - netdev_internal_class</li>
+</ul>
+</li>
+<li>bsd netdev (lib/netdev-bsd.c, for bsd platform)</li>
+<li><ul class="first">
+<li>system - netdev_bsd_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>tap - netdev_tap_class</li>
+</ul>
+</li>
+<li>windows netdev (for windows platform)</li>
+<li><ul class="first">
+<li>system - netdev_windows_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>internal - netdev_internal_class</li>
+</ul>
+</li>
+<li>dummy netdev (lib/netdev-dummy.c)</li>
+<li><ul class="first">
+<li>dummy - dummy_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>dummy-internal - dummy_internal_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>dummy-pmd - dummy_pmd_class</li>
+</ul>
+</li>
+<li>vport netdev (lib/netdev-vport.c, a vport holds a reference to a port in datapath, the latter could be opened with netdev_open())</li>
+<li><ul class="first">
+<li>tunnel class:</li>
+</ul>
+</li>
+<li><ul class="first">
+<li><ul class="first">
+<li>geneve</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul class="first">
+<li><ul class="first">
+<li>gre</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul class="first">
+<li><ul class="first">
+<li>vxlan</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul class="first">
+<li><ul class="first">
+<li>lisp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul class="first">
+<li><ul class="first">
+<li>stt</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>patch - patch_class</li>
+</ul>
+</li>
+<li>dpdk netdev</li>
+<li><ul class="first">
+<li>dpdk_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>dpdk_ring_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>dpdk_vhost_class</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>dpdk_vhost_client_class</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="call-flows">
+<h2>1.3. Call Flows<a class="headerlink" href="#call-flows" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-51.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-51.png" />
+</div>
+<ul class="simple">
+<li>Bắt đầu, khởi tạo bridge module, lấy một số tham số cấu hình từ ovsdb</li>
+<li>Sau đó, ovs-vswitchd đi vào main loop. vòng lặp đầu tiên khởi tạo một số library, bao gồm DPDK và quan trọng nhất là ofproto</li>
+<li>Tiếp theo, mỗi datapath sẽ thực hiện công việc của mình bằng cách chạy ofproto_type_run (), nó sẽ gọi vào việc triển khai type_run () cụ thể của kiểu datapath đó</li>
+<li>Mỗi bridge sẽ thực hiện công việc của mình bằng cách chạy ofproto_run (), nó sẽ gọi vào việc triển khai run () cụ thể của ofproto class</li>
+<li>ovs-vswitchd sẽ xử lý các thông báo IPC (JSON-RPC), đến từ dòng lệnh (ovs-appctl) và ovsdb-server</li>
+<li>netdev_run () được gọi để xử lý tất cả các loại netdev khác nhau</li>
+<li>Sau khi tất cả các công việc trên được thực hiện, bridge module,  unixctl server, và netdev modules sẽ chuyển sang trạng thái chặn cho đến khi các tín hiệu mới kích hoạt</li>
+</ul>
+</div>
+<div class="section" id="ovsdb">
+<h2>2. OVSDB<a class="headerlink" href="#ovsdb" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ovsdb-overview">
+<h2>2.1. OVSDB Overview<a class="headerlink" href="#ovsdb-overview" title="Permalink to this headline">¶</a></h2>
+<p>ovsdb-server cung cấp RPC interfaces cho một hoặc nhiều Open vSwitch databases (OVSDBs). Nó hỗ trợ JSON-RPC client connections qua TCP/IP hoặc Unix domain sockets (active hoặc passive). Mỗi file OVSDB có thể được chỉ định trên dòng lệnh làm cơ sở dữ liệu. Nếu không có gì được chỉ định, mặc định là /etc/openvswitch/conf.db.</p>
+<p>OVSDB nắm giữ các cấu hình switch-level:</p>
+<ul class="simple">
+<li>thông tin các bridges, interfaces, tunnel</li>
+<li>địa chỉ của OVSDB và OpenFlow controller</li>
+</ul>
+<p>Cấu hình được lưu trữ trên đĩa và vẫn tồn tại khi khởi động lại.</p>
+<p>Các thuộc tính Custome database:</p>
+<ul class="simple">
+<li>value constraints</li>
+<li>weak references</li>
+<li>garbage collection</li>
+</ul>
+<p>CLI:</p>
+<ul class="simple">
+<li>ovs-vsctl: sửa đổi DB bằng cách định cấu hình ovs-vswitchd</li>
+<li>ovsdb-tool: Quản lý DB, ví dụ: tạo / nén / chuyển đổi DB, hiển thị nhật ký DB</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>2.2. Key Data Structures<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>ovsdb_schema</li>
+<li>ovsdb</li>
+<li>ovsdb_server</li>
+<li>ovsdb_table_schema</li>
+<li>ovsdb_table</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>2.2.1. OVSDB<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ovsdb-table">
+<h2>2.2.2. OVSDB Table<a class="headerlink" href="#ovsdb-table" title="Permalink to this headline">¶</a></h2>
+<p>ovsdb core tables:</p>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-05.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-05.png" />
+</div>
+<p>Open_vSwitch là root table và luôn luôn chỉ có một dòng duy nhất</p>
+</div>
+<div class="section" id="flow-diagram">
+<h2>2.2.3. Flow Diagram<a class="headerlink" href="#flow-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-15.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-15.png" />
+</div>
+</div>
+<div class="section" id="kernel-module-datapath">
+<h2>3. kernel module (datapath)<a class="headerlink" href="#kernel-module-datapath" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="overview">
+<h2>3.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-32.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-32.png" />
+</div>
+<p>Datapath là forwarding plane của OVS. Ban đầu nó được triển khai như kernel module. Ngoài datapath được triển khai ở kernel space thì các thành phần khác được triển khai ở user space và có ít phụ thuộc vào nền tảng hệ thống. Điều đó có nghĩa là việc chuyển OVS sang các OS hay platform khác là rất đơn giản (về mặt lý thuyết): chỉ cần triển khai lại phần kernel trên OS hay platform mới</p>
+<p>Thực tế các phiên bản gần đây OVS đã có 2 loại datapath để có thể chọn: kernel datapath và userspace datapath.</p>
+<p>Open vSwitch hỗ trợ các datapath khác nhau trên các platform khác nhau:</p>
+<ul class="simple">
+<li>Linux upstream:</li>
+</ul>
+<p>datapath được triển khai bởi kernel module được vận chuyển với Linux upstream. Các tính năng dần được đưa vào kernel</p>
+<ul class="simple">
+<li>Linux OVS tree:</li>
+</ul>
+<p>datapath được triển khai bởi kernel module được phân phối với OVS source tree</p>
+<ul class="simple">
+<li>Userspace:</li>
+</ul>
+<p>Còn được gọi là DPDK, dpif-netdev hoặc dummy datapath. Đây là đường dẫn dữ liệu duy nhất hoạt động trên NetBSD và FreeBSD.</p>
+<ul class="simple">
+<li>Hyper-V:</li>
+</ul>
+<p>Còn được gọi là Windows datapath</p>
+</div>
+<div class="section" id="kernel-datapath">
+<h2>3.1.1. Kernel datapath<a class="headerlink" href="#kernel-datapath" title="Permalink to this headline">¶</a></h2>
+<p>Trên linux, kernel datapath là loại datapath mặc định</p>
+<p>Ví dụ lệnh tạo OVS bridge:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ovs-vsctl add-br br0
+
+$ ovs-vsctl show
+05daf6f1-da58-4e01-8530-f6ec0d51b4e1
+    Bridge br0
+        Port br0
+            Interface br0
+                type: internal
+</pre></div>
+</div>
+</div>
+<div class="section" id="userspace-datapath">
+<h2>3.1.2. Userspace Datapath<a class="headerlink" href="#userspace-datapath" title="Permalink to this headline">¶</a></h2>
+<p>Userspace datapath khác với datapath truyền thống ở chỗ việc chuyển tiếp và xử lý gói tin của nó được thực hiện trong userspace. Trong số đó, netdev-dpdk là một trong những cách triển khai, được hỗ trợ kể từ OVS 2.4.</p>
+<p>Lệnh để tạo OVS bridge sử dụng userspace datapath:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ovs-vsctl add-br br0 -- set Bridge br0 datapath_type=netdev
+</pre></div>
+</div>
+<p>Lưu ý chỉ định rõ datapath_type là netdev khi tạo bridge, nếu không sẽ gặp lỗi ovs-vsctl: Error detected while setting up ‘br0’.</p>
+<p><strong>Official Doc</strong></p>
+<p>Open vSwitch kernel module cho phép kiểm soát userspace linh hoạt đối với flow-level packet processing trên các thiết bị mạng được chọn. Nó có thể được sử dụng để triển khai Ethernet switch, network device bonding, VLAN processing, network access control, flow-based network control, v.v.</p>
+<p>Kernel module triển khai nhiều datapath (tương tự như bridge), mỗi chúng có thể có nhiều vport (tương tự với các port trong bridge).</p>
+<p>Khi một gói tin đến vport, kernel module sẽ xử lý nó bằng cách trích xuất flow key của nó và tra cứu nó trong flow table. Nếu có một luồng phù hợp, nó sẽ thực hiện các hành động liên quan. Nếu không trùng khớp, nó sẽ xếp hàng đợi gói đến userspace để xử lý (như một phần của quá trình xử lý, userspace có thể sẽ thiết lập một luồng để xử lý thêm các gói cùng loại hoàn toàn trong kernel).</p>
+<div class="figure">
+<img alt="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-45.png" src="https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-45.png" />
+</div>
+</div>
+<div class="section" id="id3">
+<h2>3.2. Key Data Structures<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>datapath - flow-based packet forwarding/swithcing module</li>
+<li>flow</li>
+<li>flow_table</li>
+<li>sw_flow_key</li>
+<li>vport</li>
+</ul>
+</div>
+<div class="section" id="vport">
+<h2>3.3. vport<a class="headerlink" href="#vport" title="Permalink to this headline">¶</a></h2>
+<p>Các kiểu:</p>
+<ul class="simple">
+<li>netdev</li>
+</ul>
+<p>.send = dev_queue_xmit</p>
+<p>dev_queue_xmit(skb) cuối cùng sẽ truyền gói tin trên thiết bị mạng vật lý</p>
+<ul class="simple">
+<li>internal</li>
+</ul>
+<p>.send = internal_dev_recv</p>
+<p>send method sẽ gọi netif_rx(skb) chèn skb vào TCP/IP stack, và gói cuối cùng sẽ được truyền theo ngăn xếp</p>
+<ul class="simple">
+<li>patch</li>
+</ul>
+<p>.send = patch_send()</p>
+<p>ssend method sẽ chỉ chuyển skb pointer đến vport ngang hàng</p>
+<ul class="simple">
+<li>tunnel vports: vxlan, gre, …</li>
+</ul>
+<p>tunnel xmit method in kernel, e.g. .send = vxlan_xmit for vxlan</p>
+<p><em>Tham khảo:</em>
+<a class="reference external" href="http://arthurchiao.art/blog/ovs-deep-dive-0-overview/">http://arthurchiao.art/blog/ovs-deep-dive-0-overview/</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

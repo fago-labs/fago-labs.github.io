@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Giới thiệu về Kubernetes &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Kiến trúc Kubernetes" href="architecture.html" />
+    <link rel="prev" title="Kubernetes" href="k8s.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="k8s.html">Kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Giới thiệu về Kubernetes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dat-van-de">1. Đặt vấn đề</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kubernetes-la-gi">2. Kubernetes là gì</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ung-dung-cua-kubernetes">3. Ứng dụng của Kubernetes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Kiến trúc Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Cài đặt Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prometheus-grafana.html">Monitoring - Alerting Kubernetes với Prometheus và Grafana</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="k8s.html">Kubernetes</a> &raquo;</li>
+        
+      <li>Giới thiệu về Kubernetes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/k8s/intro.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gioi-thieu-ve-kubernetes">
+<h1><a class="toc-backref" href="#id1">Giới thiệu về Kubernetes</a><a class="headerlink" href="#gioi-thieu-ve-kubernetes" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="noi-dung">
+<p class="topic-title">Nội dung</p>
+<ul class="simple">
+<li><a class="reference internal" href="#gioi-thieu-ve-kubernetes" id="id1">Giới thiệu về Kubernetes</a><ul>
+<li><a class="reference internal" href="#dat-van-de" id="id2">1. Đặt vấn đề</a></li>
+<li><a class="reference internal" href="#kubernetes-la-gi" id="id3">2. Kubernetes là gì</a></li>
+<li><a class="reference internal" href="#ung-dung-cua-kubernetes" id="id4">3. Ứng dụng của Kubernetes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dat-van-de">
+<h2><a class="toc-backref" href="#id2">1. Đặt vấn đề</a><a class="headerlink" href="#dat-van-de" title="Permalink to this headline">¶</a></h2>
+<p>Hiện nay, trong lĩnh vực công nghệ phần mềm, các kiến trúc bắt đầu thay đổi từ Monolithic sang Microservice, từ cồng kềnh to lớn sang chia nhỏ, nhẹ nhàng linh hoạt hơn, nhằm đáp ứng nhu cầu phát triển rất nhanh của các công ty và doanh nghiệp.</p>
+<p>Bài toán đặt ra ở đây là:</p>
+<ul class="simple">
+<li>Chuẩn thức hóa ứng dụng, nghĩa là ứng dụng có thể chạy ở mọi nơi mà không phụ thuộc nhiều vào môi trường</li>
+<li>Làm thế nào để triển khai ứng dụng nhanh chóng</li>
+<li>Làm thế nào để scale, đáp ứng tải</li>
+<li>Làm thế nào để quản lý các tài nguyên (CPU, RAM…) hiệu quả</li>
+</ul>
+<div class="figure">
+<img alt="https://lh3.googleusercontent.com/jgauUsfU7rwTwNYS4qnyMA9jS0UGVkdDGbjYsZ6Th9rfDIz6PDczHJET8jALP-hUhMigU4leJeMcw_mnrPGwakgTyWnBaaIlvWHuTqcRzewH4MCRKl2nWDDpZ6Jlld8Xf1jyuWU" src="https://lh3.googleusercontent.com/jgauUsfU7rwTwNYS4qnyMA9jS0UGVkdDGbjYsZ6Th9rfDIz6PDczHJET8jALP-hUhMigU4leJeMcw_mnrPGwakgTyWnBaaIlvWHuTqcRzewH4MCRKl2nWDDpZ6Jlld8Xf1jyuWU" />
+</div>
+<p>Trước khi nói về Kubernetes, cùng nhìn lại quá trình triển khai ứng dụng qua các thời kỳ:</p>
+<ul class="simple">
+<li>Thời đại triển khai theo cách truyền thống: Ban đầu, các ứng dụng được chạy trên máy chủ vật lý, các ứng dụng này cùng sử dụng tài nguyên của máy chủ, đôi khi dẫn đến sự cố phân bổ tài nguyên. Ví dụ, nếu nhiều ứng dụng cùng chạy trên một máy chủ vật lý, có thể có những trường hợp một ứng dụng sẽ chiếm phần lớn tài nguyên hơn và kết quả là các ứng dụng khác sẽ hoạt động kém đi. Giải pháp ở đây là chạy 1 ứng dụng trên một máy chủ vật lý, tuy nhiên cách này gây lãng phí tài nguyên và sẽ rất tốn kém</li>
+<li>Thời đại triển khai ảo hóa: Sau này, ảo hóa đã được giới thiệu như một giải pháp thay thế, Nó cho phép chạy nhiều Máy ảo (VM) trên một máy chủ vật lý. Ảo hóa cho phép các ứng dụng được cô lập giữa các VM và cung cấp mức độ bảo mật, vì thông tin của một ứng dụng không thể được truy cập tự do bởi một ứng dụng khác. Ảo hóa cho phép sử dụng tốt hơn các tài nguyên trong một máy chủ vật lý và cho phép khả năng mở rộng tốt hơn</li>
+<li>Thời đại triển khai Container: Các container tương tự như VM, nhưng chúng có tính cô lập để chia sẻ Hệ điều hành (HĐH) giữa các ứng dụng. Container nhẹ hơn VM, container có hệ thống tệp (filesystem), CPU, bộ nhớ, process space…</li>
+</ul>
+<p>Container đã trở nên phổ biến vì chúng có thêm nhiều lợi ích như: sử dụng tài nguyên hiệu quả, độc lập nền tảng, mở rộng nhanh chóng, hoạt động đơn giản, cải thiện năng suất…</p>
+</div>
+<div class="section" id="kubernetes-la-gi">
+<h2><a class="toc-backref" href="#id3">2. Kubernetes là gì</a><a class="headerlink" href="#kubernetes-la-gi" title="Permalink to this headline">¶</a></h2>
+<p>Kubernetes (thường được gọi tắt là k8s) là một nền tảng nguồn mở, khả chuyển, có thể mở rộng để quản lý các ứng dụng được đóng gói và các service, giúp thuận lợi trong việc cấu hình và tự động hóa việc triển khai ứng dụng.</p>
+<p>Phát triển bởi Google và ra mắt vào năm 2014, Kubernetes là một phần trong hệ sinh thái container ngày nay, đóng vai trò là là một công cụ orchestration ( tạo ra, điều phối và chỉ huy các container )</p>
+<p>Là một hệ thống toàn diện để tự động hóa việc triển khai, lập lịch và nhân rộng các ứng dụng được đóng gói, hỗ trợ nhiều công cụ container hóa như Docker.</p>
+<div class="figure">
+<img alt="https://lh4.googleusercontent.com/4uM2zfK93y8KzJJ4Xyj3oZhD1492C9EUKHqJxyOcDOnybjXS4dI45duRJsPw1DIH06nb0CIELB9oqo6JgY-LHsPoEDGeTGehfhn2wJID-t1XX5sKYYh2ElG3Lufd7m8Y490PLME" src="https://lh4.googleusercontent.com/4uM2zfK93y8KzJJ4Xyj3oZhD1492C9EUKHqJxyOcDOnybjXS4dI45duRJsPw1DIH06nb0CIELB9oqo6JgY-LHsPoEDGeTGehfhn2wJID-t1XX5sKYYh2ElG3Lufd7m8Y490PLME" />
+</div>
+</div>
+<div class="section" id="ung-dung-cua-kubernetes">
+<h2><a class="toc-backref" href="#id4">3. Ứng dụng của Kubernetes</a><a class="headerlink" href="#ung-dung-cua-kubernetes" title="Permalink to this headline">¶</a></h2>
+<p>Kubernetes đảm nhiệm việc nhân rộng và chuyển đổi dự phòng cho ứng dụng, cung cấp các mẫu deployment.
+Kubernetes còn cung cấp:</p>
+<ul class="simple">
+<li>Server discovery và cân bằng tải: Kubernetes có thể expose một container sử dụng DNS hoặc địa chỉ IP của riêng nó. Nếu lượng traffic truy cập đến một container cao, Kubernetes có thể cân bằng tải và phân phối lưu lượng mạng (network traffic) để việc triển khai được ổn định.</li>
+<li>Điều phối bộ nhớ: Kubernetes cho phép tự động mount một hệ thống lưu trữ mà bạn chọn, như local storages, public cloud providers…</li>
+<li>Tự động rollouts và rollbacks: Tự động hoá Kubernetes để tạo mới các container cho việc triển khai, xoá các container hiện có và áp dụng tất cả các resource của chúng vào container mới.</li>
+<li>Đóng gói tự động: Cung cấp cho Kubernetes một cluster bao gồm node dùng để chạy các tác vụ được đóng gói. Người quản trị có thể định nghĩa mỗi container cần vào nhiêu CPU và RAM. Kubernetes có thể điều phối các container đến các node để tận dụng tốt nhất các resource</li>
+<li>Tự phục hồi: Kubernetes khởi động lại các containers bị lỗi, thay thế các container, xoá các container không phản hồi lại cấu hình health check</li>
+<li>Quản lý cấu hình và bảo mật: Kubernetes cho phép lưu trữ và quản lý các thông tin nhạy cảm như: password, OAuth token và SSH key. Có thể triển khai và cập nhật lại secret và cấu hình ứng dụng mà không cần build lại các container image và không để lộ secret</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Kiến trúc Kubernetes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="k8s.html" class="btn btn-neutral float-left" title="Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

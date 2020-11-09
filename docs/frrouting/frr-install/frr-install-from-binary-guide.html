@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -26,10 +26,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -99,6 +99,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../frr-ospf-and-rip-use-guide.html">Cách sử dụng FRRouting</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../k8s/k8s.html">Kubernetes</a></li>
 </ul>
 
             
@@ -173,9 +179,9 @@
 <div class="section" id="chuan-bi">
 <h2>Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Máy ảo cấu hình: 2 CPU 2GB RAM 2 card mạng (1 NAT và 1 private)</p></li>
-<li><p>Hệ điều hành: Ubuntu Server 18.04</p></li>
-<li><p>Máy ảo có kết nối internet</p></li>
+<li>Máy ảo cấu hình: 2 CPU 2GB RAM 2 card mạng (1 NAT và 1 private)</li>
+<li>Hệ điều hành: Ubuntu Server 18.04</li>
+<li>Máy ảo có kết nối internet</li>
 </ul>
 </div>
 <div class="section" id="cai-dat-tren-ubuntu">
@@ -195,14 +201,14 @@ sudo apt update -y &amp;&amp; sudo apt install -y frr frr-pythontools
 </pre></div>
 </div>
 <p>Sửa file /etc/sysctl.conf</p>
-<div class="figure align-default">
+<div class="figure">
 <img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118250-8a30ed00-1edd-11eb-8faa-62c34840b52a.png" />
 </div>
 <p>Sử dụng lệnh sau để đọc lại file sysctl.conf</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span>
 </pre></div>
 </div>
-<div class="figure align-default">
+<div class="figure">
 <img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118342-ac2a6f80-1edd-11eb-9148-5e0ace19a8fe.png" />
 </div>
 <p>Kiểm tra trạng thái của FRRouting bằng lệnh</p>
@@ -210,7 +216,7 @@ sudo apt update -y &amp;&amp; sudo apt install -y frr frr-pythontools
 </pre></div>
 </div>
 <p>Nếu kết quả trả về active (running) tức là thành công</p>
-<div class="figure align-default">
+<div class="figure">
 <img alt="FRRouting" src="https://user-images.githubusercontent.com/41882267/98118535-f0b60b00-1edd-11eb-9110-ea54da7f0f47.png" />
 </div>
 </div>

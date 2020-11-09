@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ovsdb-client: Open vSwitch database JSON-RPC client &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ovsdb-client: Open vSwitch database JSON-RPC client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ovs/CLI/ovsdb-client.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ovsdb-client-open-vswitch-database-json-rpc-client">
+<h1>ovsdb-client: Open vSwitch database JSON-RPC client<a class="headerlink" href="#ovsdb-client-open-vswitch-database-json-rpc-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cach-su-dung">
+<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ovsdb-client</span> <span class="pre">[OPTIONS]</span> <span class="pre">COMMAND</span> <span class="pre">[ARG...]</span></code></p>
+<div class="section" id="valid-commands-are">
+<h3>Valid commands are:<a class="headerlink" href="#valid-commands-are" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">list-dbs</span> <span class="pre">[SERVER]</span></code> -   liệt kê databases có sẵn trên SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">get-schema</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> -  truy xuất lược đồ cho DATABASE từ SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">get-schema-version</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> -  truy xuất lược đồ cho DATABASE từ SERVER và chỉ báo cáo  số phiên bản trên stdout</p>
+<p><code class="docutils literal notranslate"><span class="pre">get-schema-cksum</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> - truy xuất lược đồ cho DATABASE từ SERVER và chỉ báo cáo   tổng kiểm tra trên stdout</p>
+<p><code class="docutils literal notranslate"> <span class="pre">list-tables</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> - liệt kê các bảng cho DATABASE trên SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">list-columns</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">[TABLE]</span></code> - liệt kê các cột trong TABLE (hoặc tất cả các bảng) trong DATABASE trên SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">transact</span> <span class="pre">[SERVER]</span> <span class="pre">TRANSACTION</span></code> -  chạy TRANSACTION (thông số cho yêu cầu “transact”) trên SERVER   và in kết quả dưới dạng JSON trên stdout</p>
+<p><code class="docutils literal notranslate"><span class="pre">query</span> <span class="pre">[SERVER]</span> <span class="pre">TRANSACTION</span></code> - chạy TRANSACTION (thông số cho yêu cầu “transact”) trên SERVER,  dưới dạng chỉ đọc và in kết quả dưới dạng JSON trên stdout</p>
+<p><code class="docutils literal notranslate"> <span class="pre">monitor</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">TABLE</span> <span class="pre">[COLUMN,...]...</span></code> - theo dõi nội dung của COLUMN trong TABLE trong DATABASE trên SERVER. COLUMN có thể bao gồm !initial, !insert, !delete, !modify để tránh nhìn thấy the specified kinds of changes.</p>
+<p><code class="docutils literal notranslate"> <span class="pre">monitor-cond</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">CONDITION</span> <span class="pre">TABLE</span> <span class="pre">[COLUMN,...]...</span></code> -  mtheo dõi nội dung khớp với CONDITION của COLUMN trong TABLE trong DATABASE trên SERVER. COLUMN có thể bao gồm !initial, !insert, !delete, !modify để tránh nhìn thấy the specified kinds of changes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">convert</span> <span class="pre">[SERVER]</span> <span class="pre">SCHEMA</span></code> - convert database on SERVER named in SCHEMA to SCHEMA.</p>
+<p><code class="docutils literal notranslate"> <span class="pre">needs-conversion</span> <span class="pre">[SERVER]</span> <span class="pre">SCHEMA</span></code> - kiểm tra xem db của SCHEMA trên SERVER có cần conversion hay không</p>
+<p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">ALL</span></code> - giám sát tất cả các thay đổi đối với tất cả các cột trong tất cả các bảng</p>
+<p><code class="docutils literal notranslate"><span class="pre">wait</span> <span class="pre">[SERVER]</span> <span class="pre">DATABASE</span> <span class="pre">STATE</span></code> - đợi đến khi DATABASE đạt đến STATE (“added” or “connected” or “removed”) trong DATBASE trên SERVER.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> - dump contents of DATABASE on SERVER to stdout</p>
+<p><code class="docutils literal notranslate"><span class="pre">backup</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">&gt;</span> <span class="pre">SNAPSHOT</span></code> - dump database contents in the form of a database file</p>
+<p><code class="docutils literal notranslate"><span class="pre">[--force]</span> <span class="pre">restore</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span> <span class="pre">&lt;</span> <span class="pre">SNAPSHOT</span></code> - khôi phục nội dung cơ sở dữ liệu từ một file cơ sở dữ liệu</p>
+<p><code class="docutils literal notranslate"><span class="pre">lock</span> <span class="pre">[SERVER]</span> <span class="pre">LOCK</span></code> - tạo hoặc chờ LOCK trong SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">steal</span> <span class="pre">[SERVER]</span> <span class="pre">LOCK</span></code> - lấy LOCK từ SERVER</p>
+<p><code class="docutils literal notranslate"><span class="pre">unlock</span> <span class="pre">[SERVER]</span> <span class="pre">LOCK</span></code> - unlock LOCK t SERVER</p>
+<p><em>The default SERVER is unix:/var/run/openvswitch/db.sock.</em></p>
+<p><em>The default DATABASE is Open_vSwitch.</em></p>
+</div>
+<div class="section" id="active-server-connection-methods">
+<h3>Active SERVER connection methods:<a class="headerlink" href="#active-server-connection-methods" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">tcp:IP:PORT</span></code>       -     PORT at remote IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">ssl:IP:PORT</span></code>       -      SSL PORT at remote IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">unix:FILE</span></code>         -      Unix domain socket named FILE</p>
+</div>
+<div class="section" id="passive-server-connection-methods">
+<h3>Passive SERVER connection methods:<a class="headerlink" href="#passive-server-connection-methods" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ptcp:PORT[:IP]</span></code>     -     listen to TCP PORT on IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">pssl:PORT[:IP]</span></code>     -     listen for SSL on PORT on IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">punix:FILE</span></code>         -     listen on Unix domain socket FILE</p>
+</div>
+<div class="section" id="pki-configuration-required-to-use-ssl">
+<h3>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--private-key=FILE</span></code> - file with private key</p>
+<p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--certificate=FILE</span></code> - file with certificate for private key</p>
+<p><code class="docutils literal notranslate"><span class="pre">-C</span></code>, <code class="docutils literal notranslate"><span class="pre">--ca-cert=FILE</span></code>    -  file with peer CA certificate</p>
+<p><code class="docutils literal notranslate"><span class="pre">--bootstrap-ca-cert=FILE</span></code> - file with peer CA certificate to read or create</p>
+</div>
+<div class="section" id="ssl-options">
+<h3>SSL options:<a class="headerlink" href="#ssl-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--ssl-protocols=PROTOS</span></code> -  list of SSL protocols to enable</p>
+<p><code class="docutils literal notranslate"><span class="pre">--ssl-ciphers=CIPHERS</span></code> -  list of SSL ciphers to enableget-schema [SERVER] [DATABASE]</p>
+</div>
+<div class="section" id="output-formatting-options">
+<h3>Output formatting options:<a class="headerlink" href="#output-formatting-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--format=FORMAT</span></code>    -     set output formatting to FORMAT    (“table”, “html”, “csv”, or “json”)</p>
+<p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--data=FORMAT</span></code>     -      set table cell output formatting to  FORMAT (“string”, “bare”, or “json”)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-headings</span></code>      -         omit table heading row</p>
+<p><code class="docutils literal notranslate"><span class="pre">--pretty</span></code>          -          pretty-print JSON in output</p>
+<p><code class="docutils literal notranslate"><span class="pre">--bare</span></code>             -         equivalent to “–format=list –data=bare –no-headings”</p>
+<p><code class="docutils literal notranslate"><span class="pre">--timestamp</span></code>        -         timestamp “monitor” output</p>
+</div>
+<div class="section" id="daemon-options">
+<h3>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>Output formatting options:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--format=FORMAT</span></code>    -     set output formatting to FORMAT       (“table”, “html”, “csv”, or “json”)</p>
+<p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--data=FORMAT</span></code>     -      set table cell output formatting to   FORMAT (“string”, “bare”, or “json”)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-headings</span></code>        -       omit table heading row</p>
+<p><code class="docutils literal notranslate"><span class="pre">--pretty</span></code>            -        pretty-print JSON in output</p>
+<p><code class="docutils literal notranslate"><span class="pre">--bare</span></code>              -        equivalent to “–format=list –data=bare –no-headings”</p>
+<p><code class="docutils literal notranslate"><span class="pre">--timestamp</span></code>         -        timestamp “monitor” output</p>
+</div>
+<div class="section" id="id2">
+<h3>Daemon options:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--detach</span></code>        -        run in background as daemon</p>
+<p><code class="docutils literal notranslate"><span class="pre">--monitor</span></code>      -         creates a process to monitor this daemon</p>
+<p><code class="docutils literal notranslate"><span class="pre">--user=username[:group]</span></code> - changes the effective daemon user:group</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-chdir</span></code>         -     do not chdir to ‘/’</p>
+<p><code class="docutils literal notranslate"><span class="pre">--pidfile[=FILE]</span></code>    -    create pidfile (default: /var/run/openvswitch/ovsdb-client.pid)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--overwrite-pidfile</span> </code>  -  with –pidfile, start even if already running</p>
+</div>
+<div class="section" id="logging-options">
+<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  set logging levels</p>
+<p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>       -     set maximum verbosity level</p>
+<p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span> </code>   -    enable logging to specified FILE  (default: /var/log/openvswitch/ovsdb-client.log)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--syslog-method=(libc|unix:file|udp:ip:port)</span></code> -  specify how to send messages to syslog daemon</p>
+<p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> - also send syslog msgs to HOST:PORT via UDP</p>
+</div>
+<div class="section" id="other-options">
+<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>         -         display this help message</p>
+<p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>       -        display version information</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

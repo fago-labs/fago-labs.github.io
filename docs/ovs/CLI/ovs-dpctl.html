@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ovs-dpctl: quản lý Open vSwitch datapath &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ovs-dpctl: quản lý Open vSwitch datapath</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ovs/CLI/ovs-dpctl.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ovs-dpctl-quan-ly-open-vswitch-datapath">
+<h1>ovs-dpctl: quản lý Open vSwitch datapath<a class="headerlink" href="#ovs-dpctl-quan-ly-open-vswitch-datapath" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cach-su-dung">
+<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ovs-dpctl</span> <span class="pre">[options]</span> <span class="pre">command</span> <span class="pre">[switch]</span> <span class="pre">[args...]</span></code></p>
+<div class="section" id="command">
+<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">add-dp</span> <span class="pre">DP</span> <span class="pre">[IFACE...]</span></code>   -  thêm mới datapath DP (with IFACEs)</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-dp</span> <span class="pre">DP</span></code>            -    xóa local datapath DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-if</span> <span class="pre">DP</span> <span class="pre">IFACE...</span> </code>  -   thêm mỗi IFACE như là port trên DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">set-if</span> <span class="pre">DP</span> <span class="pre">IFACE...</span></code>    -   cấu hình lại mỗi IFACE trong DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-if</span> <span class="pre">DP</span> <span class="pre">IFACE...</span> </code>   -   xóa từng IFACE từ DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-dps</span></code>          -       hiện tên tất cả datapaths</p>
+<p><code class="docutils literal notranslate"><span class="pre">show</span></code>             -        hiện thông tin cơ bản tất cả datapaths</p>
+<p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">DP...</span></code>        -  hiện flows trong DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-flow</span> <span class="pre">[DP]</span> <span class="pre">FLOW</span> <span class="pre">ACTIONS</span></code> - thêm FLOW với ACTIONS vào DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-flow</span> <span class="pre">[DP]</span> <span class="pre">FLOW</span> <span class="pre">ACTIONS</span></code> - thay đổi FLOW actions thành ACTIONS trong DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">get-flow</span> <span class="pre">[DP]</span> <span class="pre">ufid:UFID</span></code> -   fetch flow tương ứng với UFID</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-flow</span> <span class="pre">[DP]</span> <span class="pre">FLOW</span></code>     -    xóa FLOW từ DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-flows</span> <span class="pre">[DP]</span></code>        -     xóa tất cả flow từ DP</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-conntrack</span> <span class="pre">[DP]</span> <span class="pre">[zone=ZONE]</span></code> - display conntrack entries for ZONE</p>
+<p><code class="docutils literal notranslate"><span class="pre">flush-conntrack</span> <span class="pre">[DP]</span> <span class="pre">[zone=ZONE]</span> <span class="pre">[ct-tuple]</span></code> - delete matched conntrack entries in ZONE</p>
+<p><code class="docutils literal notranslate"><span class="pre">ct-stats-show</span> <span class="pre">[DP]</span> <span class="pre">[zone=ZONE]</span> <span class="pre">[verbose]</span></code> - CT connections grouped by protocol</p>
+<p><code class="docutils literal notranslate"><span class="pre">ct-bkts</span> <span class="pre">[DP]</span> <span class="pre">[gt=N]</span></code> - display connections per CT bucket</p>
+<p><em>Each IFACE on add-dp, add-if, and set-if may be followed by
+comma-separated options.  See ovs-dpctl(8) for syntax, or the
+Interface table in ovs-vswitchd.conf.db(5) for an options list.
+For COMMAND dump-flows, add-flow, mod-flow, del-flow and
+del-flows, DP is optional if there is only one datapath.</em></p>
+</div>
+<div class="section" id="logging-options">
+<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  set logging levels</p>
+<p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>      -      set maximum verbosity level</p>
+<p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>   -     enable logging to specified FILE      (default: /var/log/openvswitch/ovs-dpctl.log)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--syslog-method=(libc|unix:file|udp:ip:port)</span></code>  -    specify how to send messages to syslog daemon</p>
+<p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> - also send syslog msgs to HOST:PORT via UDP</p>
+</div>
+<div class="section" id="options-for-show-and-mod-flow">
+<h3>Options for show and mod-flow:<a class="headerlink" href="#options-for-show-and-mod-flow" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-s</span></code>,  <code class="docutils literal notranslate"><span class="pre">--statistics</span></code>     -     hiện số liệu thống kê cho port hoặc flow</p>
+</div>
+<div class="section" id="options-for-dump-flows">
+<h3>Options for dump-flows:<a class="headerlink" href="#options-for-dump-flows" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--more</span></code>           -       increase verbosity of output</p>
+<p><code class="docutils literal notranslate"><span class="pre">--names</span></code>            -         use port names in output</p>
+</div>
+<div class="section" id="options-for-mod-flow">
+<h3>Options for mod-flow:<a class="headerlink" href="#options-for-mod-flow" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--may-create</span></code>        -        tạo flow nếu chưa tồn tại</p>
+<p><code class="docutils literal notranslate"><span class="pre">--read-only</span></code>        -         không chạy lệnh read/write</p>
+<p><code class="docutils literal notranslate"><span class="pre">--clear</span></code>            -        đặt lại số liệu thống kê hiện có về không</p>
+</div>
+<div class="section" id="other-options">
+<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--timeout=SECS</span></code>    -      give up after SECS seconds</p>
+<p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>            -      display this help message</p>
+<p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>          -     display version information</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
