@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cài đặt Openstack &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Vận hành Openstack trên Dashboard" href="van-hanh-openstack-tren-dashboard.html" />
+    <link rel="prev" title="Giới thiệu về Openstack" href="gioi-thieu-ve-openstack.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="openstack.html">Openstack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gioi-thieu-chung.html">Giới thiệu chung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gioi-thieu-ve-openstack.html">Giới thiệu về Openstack</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cài đặt Openstack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chuan-bi">Chuẩn bị</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cai-dat">Cài đặt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="van-hanh-openstack-tren-dashboard.html">Vận hành Openstack trên Dashboard</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="openstack.html">Openstack</a> &raquo;</li>
+        
+      <li>Cài đặt Openstack</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Openstack/cai-dat-openstack.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cai-dat-openstack">
+<h1>Cài đặt Openstack<a class="headerlink" href="#cai-dat-openstack" title="Permalink to this headline">¶</a></h1>
+<p>Một trong những cách cài OpenStack trên máy chủ Ubuntu đơn giản nhất là
+thông qua DevStack. DevStack là một loạt các script được sử dụng để mang lại môi
+trường OpenStack hoàn chỉnh dựa trên phiên bản mới nhất.</p>
+<p>Mặc dù là giải pháp đơn giản nhất, tuy nhiên việc cài OpenStack trên máy chủ
+Ubuntu bằng DevStack cũng mất khá nhiều thời gian, có thể từ 30-60 phút.</p>
+<div class="section" id="chuan-bi">
+<h2>Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Phần mềm VMWare</p>
+</li>
+<li><p class="first">CPU: 4vCPU</p>
+</li>
+<li><p class="first">RAM: 8GB</p>
+</li>
+<li><p class="first">DISK: 30GB</p>
+</li>
+<li><p class="first">2 Network Adapter. Trong đó:</p>
+<blockquote>
+<div><ul class="simple">
+<li>1 Network Adapter NAT dùng để đi ra ngoài internet</li>
+<li>1 Network Adapter Private dùng để host OpenStack Image Ubuntu 64-bit server 18.04</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Sau khi cài đặt xong máy ảo Ubuntu 18.04, bật tất cả network interface.</p>
+</div>
+<div class="section" id="cai-dat">
+<h2>Cài đặt<a class="headerlink" href="#cai-dat" title="Permalink to this headline">¶</a></h2>
+<p>Bước đầu tiên cần làm để cài OpenStack trên máy chủ Ubuntu bằng DevStack
+là tạo một tài khoản người dùng không root, sau đó sử dụng tài khoản này để cài
+OpenStack. Mở cửa sổ Terminal, sau đó nhập lệnh dưới đây vào:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">useradd</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">stack</span> <span class="o">-</span><span class="n">m</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<p>Vì người dùng này sẽ thực hiện nhiều thay đổi đối với hệ thống của bạn, nên
+người dùng sẽ có các đặc quyền sudo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;stack ALL=(ALL) NOPASSWD: ALL&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sudoers</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">stack</span>
+</pre></div>
+</div>
+<p>Thay đổi sang người dùng vừa tạo bằng lệnh:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span> <span class="o">-</span> <span class="n">stack</span>
+</pre></div>
+</div>
+<p>Download DevStack với <code class="docutils literal notranslate"><span class="pre">--branch</span> <span class="pre">stable/(version)</span></code> để chọn phiên bản:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="o">.</span><span class="n">openstack</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">openstack</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">devstack</span> <span class="o">--</span><span class="n">branch</span> <span class="n">stable</span><span class="o">/</span><span class="n">train</span>
+</pre></div>
+</div>
+<p>Sau khi đã download xong thì di chuyển vào folder devstack, tạo file <code class="docutils literal notranslate"><span class="pre">local.conf</span></code>
+bằng các lệnh:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">devstack</span><span class="o">/</span>
+<span class="n">nano</span> <span class="n">local</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Trước khi thực thi lệnh cài đặt, sẽ phải cấu hình file local.conf. Mở file
+local.conf bằng cách sử dụng lệnh <code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">local.conf</span></code>. Sau đó điền nội dung như sau:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[[local|localrc]]
+HOST_IP=SERVER_IP
+ADMIN_PASSWORD=PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+</pre></div>
+</div>
+<p><em>Lưu ý:</em> Trong đoạn mã trên, thay thế PASSWORD bằng một mật khẩu duy nhất
+mà bạn muốn sử dụng và SERVER_IP bằng địa chỉ IP của máy chủ OpenStack. Sau
+khi hoàn tất lưu và đóng file lại.</p>
+<p>Bước tiếp theo bây giờ là thực thi lệnh để cài đặt OpenStack. Sử dụng lệnh sau
+để cài đặt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">stack</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Quá trình cài đặt sẽ mất khoảng 30-60 phút để hoàn tất.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="van-hanh-openstack-tren-dashboard.html" class="btn btn-neutral float-right" title="Vận hành Openstack trên Dashboard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gioi-thieu-ve-openstack.html" class="btn btn-neutral float-left" title="Giới thiệu về Openstack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
