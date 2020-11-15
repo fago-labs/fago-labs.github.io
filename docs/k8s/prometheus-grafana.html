@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Monitoring - Alerting Kubernetes với Prometheus và Grafana &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Cài đặt Kubernetes" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="k8s.html">Kubernetes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Giới thiệu về Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html">Kiến trúc Kubernetes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Cài đặt Kubernetes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Monitoring - Alerting Kubernetes với Prometheus và Grafana</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prometheus">1. Prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grafana">2. Grafana</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cai-dat-prometheus-va-grafana">3. Cài đặt Prometheus và Grafana</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#helm">Helm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cai-dat-prometheus-va-grafana-bang-helm">Cài đặt Prometheus và Grafana bằng Helm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expose-service">Expose Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#truy-cap-vao-service">Truy cập vào service</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#monitoring-va-alerting">4. Monitoring và Alerting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#notification-channel-discord">Notification Channel Discord</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="k8s.html">Kubernetes</a> &raquo;</li>
+        
+      <li>Monitoring - Alerting Kubernetes với Prometheus và Grafana</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/k8s/prometheus-grafana.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="monitoring-alerting-kubernetes-voi-prometheus-va-grafana">
+<h1><a class="toc-backref" href="#id1">Monitoring - Alerting Kubernetes với Prometheus và Grafana</a><a class="headerlink" href="#monitoring-alerting-kubernetes-voi-prometheus-va-grafana" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="noi-dung">
+<p class="topic-title">Nội dung</p>
+<ul class="simple">
+<li><a class="reference internal" href="#monitoring-alerting-kubernetes-voi-prometheus-va-grafana" id="id1">Monitoring - Alerting Kubernetes với Prometheus và Grafana</a><ul>
+<li><a class="reference internal" href="#prometheus" id="id2">1. Prometheus</a></li>
+<li><a class="reference internal" href="#grafana" id="id3">2. Grafana</a></li>
+<li><a class="reference internal" href="#cai-dat-prometheus-va-grafana" id="id4">3. Cài đặt Prometheus và Grafana</a><ul>
+<li><a class="reference internal" href="#helm" id="id5">Helm</a></li>
+<li><a class="reference internal" href="#cai-dat-prometheus-va-grafana-bang-helm" id="id6">Cài đặt Prometheus và Grafana bằng Helm</a></li>
+<li><a class="reference internal" href="#expose-service" id="id7">Expose Service</a></li>
+<li><a class="reference internal" href="#truy-cap-vao-service" id="id8">Truy cập vào service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring-va-alerting" id="id9">4. Monitoring và Alerting</a><ul>
+<li><a class="reference internal" href="#notification-channel-discord" id="id10">Notification Channel Discord</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="prometheus">
+<h2><a class="toc-backref" href="#id2">1. Prometheus</a><a class="headerlink" href="#prometheus" title="Permalink to this headline">¶</a></h2>
+<p>Prometheus là một bộ công cụ giám sát và cảnh báo hệ thống mã nguồn mở ban đầu được xây dựng bởi công ty SoundCloud. Được thành lập vào năm 2012, nhiều công ty và tổ chức đã áp dụng Prometheus vào hệ thống và dự án này có một cộng đồng người dùng và nhà phát triển rất tích cực.</p>
+<p>Prometheus bây giờ đã trở thành một dự án mã nguồn mở độc lập và được duy trì độc lập với bất kỳ công ty nào. Prometheus đã tham gia vào tổ chức Cloud Native Computing Foundation vào năm 2016 với tư cách là dự án được ưu tiên phát triển lớn thứ hai, sau Kubernetes (K8s).</p>
+<p>Prometheus có khả năng thu thập thông số/số liệu (metric) từ các mục tiêu được cấu hình theo các khoảng thời gian nhất định, đánh giá các biểu thức quy tắc, hiển thị kết quả và có thể kích hoạt cảnh báo nếu một số điều kiện được thỏa mãn yêu cầu.</p>
+</div>
+<div class="section" id="grafana">
+<h2><a class="toc-backref" href="#id3">2. Grafana</a><a class="headerlink" href="#grafana" title="Permalink to this headline">¶</a></h2>
+<p>Grafana là một giao diện/dashboard theo dõi hệ thống (open source), hỗ trợ rất nhiều loại dashboard và các loại graph khác nhau để người quản trị dễ dàng theo dõi.</p>
+<p>Grafana có thể truy xuất dữ liệu từ Graphite, Elasticsearch, OpenTSDB, Prometheus và InfluxDB. Grafana là một công cụ mạnh mẽ để truy xuất và biểu diễn dữ liệu dưới dạng các đồ thị và biểu đồ.</p>
+</div>
+<div class="section" id="cai-dat-prometheus-va-grafana">
+<h2><a class="toc-backref" href="#id4">3. Cài đặt Prometheus và Grafana</a><a class="headerlink" href="#cai-dat-prometheus-va-grafana" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="helm">
+<h3><a class="toc-backref" href="#id5">Helm</a><a class="headerlink" href="#helm" title="Permalink to this headline">¶</a></h3>
+<p>Helm là package manager của Kubernetes, dùng để quản lý các Kubernetes application được dựng lên từ những Kubernetes resource. Cài đặt với Helm sẽ đơn giản hơn thay vì viết từng file yaml</p>
+<p>Trên Master node, chạy lệnh sau để cài đặt Helm</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">baltocdn</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">helm</span><span class="o">/</span><span class="n">signing</span><span class="o">.</span><span class="n">asc</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">add</span> <span class="o">-</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">apt</span><span class="o">-</span><span class="n">transport</span><span class="o">-</span><span class="n">https</span> <span class="o">--</span><span class="n">yes</span>
+<span class="n">echo</span> <span class="s2">&quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">helm</span><span class="o">-</span><span class="n">stable</span><span class="o">-</span><span class="n">debian</span><span class="o">.</span><span class="n">list</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">helm</span>
+</pre></div>
+</div>
+<p>Sau khi cài xong, chạy lệnh <strong>helm version</strong> để kiểm tra version của Helm</p>
+</div>
+<div class="section" id="cai-dat-prometheus-va-grafana-bang-helm">
+<h3><a class="toc-backref" href="#id6">Cài đặt Prometheus và Grafana bằng Helm</a><a class="headerlink" href="#cai-dat-prometheus-va-grafana-bang-helm" title="Permalink to this headline">¶</a></h3>
+<p>Thêm Repo cho Helm</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">helm</span> <span class="n">repo</span> <span class="n">add</span> <span class="n">prometheus</span><span class="o">-</span><span class="n">community</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">prometheus</span><span class="o">-</span><span class="n">community</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">helm</span><span class="o">-</span><span class="n">charts</span>
+<span class="n">helm</span> <span class="n">repo</span> <span class="n">add</span> <span class="n">stable</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">charts</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span>
+<span class="n">helm</span> <span class="n">repo</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Tạo namespace cho monitoring</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">create</span> <span class="n">namespace</span> <span class="n">monitoring</span>
+</pre></div>
+</div>
+<p>Cài đặt chart</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">helm</span> <span class="n">install</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">monitoring</span> <span class="n">prome</span><span class="o">-</span><span class="n">grafana</span> <span class="n">prometheus</span><span class="o">-</span><span class="n">community</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">prometheus</span><span class="o">-</span><span class="n">stack</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expose-service">
+<h3><a class="toc-backref" href="#id7">Expose Service</a><a class="headerlink" href="#expose-service" title="Permalink to this headline">¶</a></h3>
+<p>Để sử dụng được dịch vụ của Prometheus và Grafana, cần expose dịch vụ ra ngoài internet. Sử dụng Node Port. Dùng lệnh get pod để xem các pod của Prometheus chạy trên node nào</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@master</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get pods --namespace monitoring -o wide</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://lh5.googleusercontent.com/adGP0G4NOJXjG1eXPF91DmwEwY2tiDd_2Ng5AiI2r2ei4IfFVa4Deq7QrK1ea4ECux_qEUjyaaX4YQ7vGn_nBDMnhUd6hddqSqYX_15LVIovPtFQ_ZR-pWlxbtH8SXwagLYboPQ" src="https://lh5.googleusercontent.com/adGP0G4NOJXjG1eXPF91DmwEwY2tiDd_2Ng5AiI2r2ei4IfFVa4Deq7QrK1ea4ECux_qEUjyaaX4YQ7vGn_nBDMnhUd6hddqSqYX_15LVIovPtFQ_ZR-pWlxbtH8SXwagLYboPQ" />
+</div>
+<p>Dùng lệnh get service để xem các dịch vụ</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@master</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get svc --namespace monitoring -o wide</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://lh4.googleusercontent.com/1qC6feNUOQT8W75OAkog7bTHt9apWI5BUdEZ5RLEuymXxdLxNsZ0WhPBKBBgK5ZAZCfEWhp3fHfDLEo9F49oi1wa6_-KAA77f3g_cSrdWL0zjYmPeT2tVbkasRZ6J_xjEXAA7Fk" src="https://lh4.googleusercontent.com/1qC6feNUOQT8W75OAkog7bTHt9apWI5BUdEZ5RLEuymXxdLxNsZ0WhPBKBBgK5ZAZCfEWhp3fHfDLEo9F49oi1wa6_-KAA77f3g_cSrdWL0zjYmPeT2tVbkasRZ6J_xjEXAA7Fk" />
+</div>
+<p>Có 1 service cần lưu ý là: prome-grafana. Đây là service của Grafana. Tiến hành chỉnh sửa service bằng lệnh edit svc</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">edit</span> <span class="n">svc</span> <span class="n">prome</span><span class="o">-</span><span class="n">grafana</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">monitoring</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://lh3.googleusercontent.com/igu-eQgmgO2NbRG3C5h2sGZcw-eS2F4aQwLajE-avyEe3eJQCWtvIVDaP6crtjd0v1IU5hd6N5-L7KXVLXwDrFkdlX8NLND9mN40w1tJ8G1R1FUW5uTU6NgAInkLSWuQYhxswmI" src="https://lh3.googleusercontent.com/igu-eQgmgO2NbRG3C5h2sGZcw-eS2F4aQwLajE-avyEe3eJQCWtvIVDaP6crtjd0v1IU5hd6N5-L7KXVLXwDrFkdlX8NLND9mN40w1tJ8G1R1FUW5uTU6NgAInkLSWuQYhxswmI" />
+</div>
+<p>Sửa mục type của service từ ClusterIP thành NodePort và lưu lại. Dùng lệnh describe svc để xem NodePort của service đó</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">describe</span> <span class="n">svc</span>  <span class="n">prome</span><span class="o">-</span><span class="n">grafana</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">monitoring</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/98CIQ0Hp2W3m0Vw5LmJePh-WhFbu6oBhfPgWfNaIeQngf3_I5nN_ISwn-WnkZWBvA2ZvD4rY5i1EgvYk8K_tHSA_-Emanvv7Vz_FFPoq34LRCvREW4vKL2nMSjhwa_omUVsEYVQ" src="https://lh6.googleusercontent.com/98CIQ0Hp2W3m0Vw5LmJePh-WhFbu6oBhfPgWfNaIeQngf3_I5nN_ISwn-WnkZWBvA2ZvD4rY5i1EgvYk8K_tHSA_-Emanvv7Vz_FFPoq34LRCvREW4vKL2nMSjhwa_omUVsEYVQ" />
+</div>
+<p>NodePort của service prome-grafana là <strong>31931</strong></p>
+</div>
+<div class="section" id="truy-cap-vao-service">
+<h3><a class="toc-backref" href="#id8">Truy cập vào service</a><a class="headerlink" href="#truy-cap-vao-service" title="Permalink to this headline">¶</a></h3>
+<p>Chạy lệnh get pod để xem các service chạy trên Node nào</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="n">namespace</span> <span class="n">monitoring</span> <span class="o">-</span><span class="n">o</span> <span class="n">wide</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://lh4.googleusercontent.com/8IZO6Xmz2JvDq71bcjizJSbSUxn2ih6b5P_TjxW8UrHRBc6ZGYOeDa4QFu5LuheBH5nBP5FtOKas8oLYCRPUdkrZNLa6XxvsbguPwaD-8iM7zEGlC8A1upTY-9xyLrQojaZdtNk" src="https://lh4.googleusercontent.com/8IZO6Xmz2JvDq71bcjizJSbSUxn2ih6b5P_TjxW8UrHRBc6ZGYOeDa4QFu5LuheBH5nBP5FtOKas8oLYCRPUdkrZNLa6XxvsbguPwaD-8iM7zEGlC8A1upTY-9xyLrQojaZdtNk" />
+</div>
+<p>Service prome-grafana có Endpoint là 192.168.189.72:3000 -&gt; node Worker2</p>
+<p>Truy cập vào Grafana qua địa chỉ <a class="reference external" href="http://35.247.146.200:31931">http://35.247.146.200:31931</a></p>
+<div class="figure">
+<img alt="https://lh3.googleusercontent.com/B8g8MevVCSjA2Z6ylr3ywzqr46YXC43BkhBKMaZSB4abM4Qwh0VLLwYKzMyo4CsK-YAaAMktWVynfkMi1tWucQ4e_vTIr-R7zPzJUzNiSl6S2nT0mJrENSvjG7J1BDW7cPUpsws" src="https://lh3.googleusercontent.com/B8g8MevVCSjA2Z6ylr3ywzqr46YXC43BkhBKMaZSB4abM4Qwh0VLLwYKzMyo4CsK-YAaAMktWVynfkMi1tWucQ4e_vTIr-R7zPzJUzNiSl6S2nT0mJrENSvjG7J1BDW7cPUpsws" />
+</div>
+</div>
+</div>
+<div class="section" id="monitoring-va-alerting">
+<h2><a class="toc-backref" href="#id9">4. Monitoring và Alerting</a><a class="headerlink" href="#monitoring-va-alerting" title="Permalink to this headline">¶</a></h2>
+<p>Prometheus dùng các trình daemon cài sẵn trên các node để thu thập các thông tin cần thiết, giao tiếp với máy chủ quản lý monitor qua giao thức HTTP/HTTPs và lưu trữ data theo dạng time-series database (TSDB).</p>
+<p>Tuy nhiên, sử dụng Grafana sẽ có giao diện đẹp hơn, chia thành nhiều mục để người dùng dễ dàng hơn trong việc đánh giá hiệu suất của cluster. Grafana sẽ lấy dữ liệu metric thu được từ Prometheus, phân tích và tạo ra dashboard mô tả trực quan các thông số như CPU, RAM, Disk, Network…</p>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/n79bCXboJKBtZhEqK2La6qtw8Owc3Z_Hc0DjxsKD_zZa13x6AuZQjX5npqd2UhH6B9W9JE_U66mnmwEteKN3BMIh_SHQQOsrLfgNy2ZZ5CdVyIGogJB4m6-Vrh6XBhhoyWLITlU" src="https://lh6.googleusercontent.com/n79bCXboJKBtZhEqK2La6qtw8Owc3Z_Hc0DjxsKD_zZa13x6AuZQjX5npqd2UhH6B9W9JE_U66mnmwEteKN3BMIh_SHQQOsrLfgNy2ZZ5CdVyIGogJB4m6-Vrh6XBhhoyWLITlU" />
+</div>
+<p>Thống kê chi tiết các dashboard của Grafana Người dùng có thể chọn các dashboard của Grafana</p>
+<div class="figure">
+<img alt="https://lh4.googleusercontent.com/ahMakVpEhxX5wRG4pjhOcT7PRYSCiDF8gmB7o-D6KDqQx-7_qzuDUmvJ7vtHyuhRSUIIMX11KCISLuk7b-GcRXCBv1Y2Iin3Zu8j4OQWmypvcJiGAQ08gwMIDXvABfuYKXSmTiE" src="https://lh4.googleusercontent.com/ahMakVpEhxX5wRG4pjhOcT7PRYSCiDF8gmB7o-D6KDqQx-7_qzuDUmvJ7vtHyuhRSUIIMX11KCISLuk7b-GcRXCBv1Y2Iin3Zu8j4OQWmypvcJiGAQ08gwMIDXvABfuYKXSmTiE" />
+</div>
+<p>Alert giúp người dùng xác định những vấn đề bất thường xảy ra trong hệ thống. Bằng cách tùy chỉnh những thay đổi, người dùng có thể giảm thiểu sự gián đoạn trong hệ thống. Alert gồm 2 phần:</p>
+<ul class="simple">
+<li>Alert Rule: Là điều kiện để Alert được kích hoạt, Alert Rule được người dùng định nghĩa bằng 1 hoặc nhiều điều kiện</li>
+<li>Notification channel: Cách mà Alert được gửi đi, khi điều kiện của Alert được kích hoạt. Grafana sẽ gửi sẽ gửi thông báo cho channel. Notification channel có thể là Email, Telegram, Discord…</li>
+</ul>
+<p>Grafana 4.0 trở lên hỗ trợ cấu hình Alert</p>
+<div class="section" id="notification-channel-discord">
+<h3><a class="toc-backref" href="#id10">Notification Channel Discord</a><a class="headerlink" href="#notification-channel-discord" title="Permalink to this headline">¶</a></h3>
+<p>Discord là hệ thống trò chuyện bằng giọng nói và văn bản, cho phép giao tiếp với những người khác. Bất cứ ai cũng có thể tạo ra một máy chủ lưu trữ thảo luận với mọi người. Discord có mặt trên các hệ điều hành như Window, Ubuntu, Mac OS, Android…</p>
+<p>Sau khi đăng ký tài khoản Discord, tiến hành tạo 1 server Discord - đây là nơi mà Alert từ Grafana sẽ gửi về. Đặt tên cho server</p>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/Ezi2LInMm97R6_F31TFdO8oes5W0SI50wxxmeYaToI2X0LFPw8xvgN1SSHuselihW2tb4SCQMSht2-DSG0CM3WhBxDPhfSn8r_Feuk5d0xZ7f1jJ7lB8UkL_I8vflmvQ8mQD1WM" src="https://lh6.googleusercontent.com/Ezi2LInMm97R6_F31TFdO8oes5W0SI50wxxmeYaToI2X0LFPw8xvgN1SSHuselihW2tb4SCQMSht2-DSG0CM3WhBxDPhfSn8r_Feuk5d0xZ7f1jJ7lB8UkL_I8vflmvQ8mQD1WM" />
+</div>
+<p>Vào Server Setting -&gt; Integration. Tạo 1 Webhook cho Server</p>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/aHDvg2urecOLjhrhWJJFyLQnxTNvdiC9f_0_Wv99oR5-bVbtLD17E2rrTtqPO62rhtgf9D01Y6XsVVJoP8kZzdbyzi4eyKumWC2LK-76wVXaysBiVPCMxG2kY6lDugx_3TFcv74" src="https://lh6.googleusercontent.com/aHDvg2urecOLjhrhWJJFyLQnxTNvdiC9f_0_Wv99oR5-bVbtLD17E2rrTtqPO62rhtgf9D01Y6XsVVJoP8kZzdbyzi4eyKumWC2LK-76wVXaysBiVPCMxG2kY6lDugx_3TFcv74" />
+</div>
+<p>Đặt tên cho Webhook và copy Webhook URL</p>
+<div class="figure">
+<img alt="https://lh3.googleusercontent.com/HNMauFllnDwfckORYc5052R174hpwIM2i8LPeVjvXoQhT2pHe6Tnb7FlvgkqK8zg1S00rsvlI9SkaywfDDCzeozil2OFMCyKUXHj1EDZ8ZkPIua8NxmpVe5CDjDLCPWwreFF8eg" src="https://lh3.googleusercontent.com/HNMauFllnDwfckORYc5052R174hpwIM2i8LPeVjvXoQhT2pHe6Tnb7FlvgkqK8zg1S00rsvlI9SkaywfDDCzeozil2OFMCyKUXHj1EDZ8ZkPIua8NxmpVe5CDjDLCPWwreFF8eg" />
+</div>
+<p>Truy cập vào phần Alert trên Grafana, chọn New Channel để tạo Notification Channel. Đặt tên cho Channel, chọn type Discord, paste Webhook URL của Discord đã copy trước đó vào phần Webhook URL</p>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/p6K8cb2nRoNJcMYFX0TdKmo3YJh48NRY5NpEflXROvKIXJjrD4YYB2NqlTHKRLsL_VCys68a3UWLM6mWynkxATASPsZRl_psCqXQ1M0wNpPYYcEAzwqyastPOpsL1GdtS3-N8TM" src="https://lh6.googleusercontent.com/p6K8cb2nRoNJcMYFX0TdKmo3YJh48NRY5NpEflXROvKIXJjrD4YYB2NqlTHKRLsL_VCys68a3UWLM6mWynkxATASPsZRl_psCqXQ1M0wNpPYYcEAzwqyastPOpsL1GdtS3-N8TM" />
+</div>
+<p>Để kiểm tra Notification có hoạt động hay không, click vào Test. Grafana sẽ gửi 1 Alert Test về Discord server</p>
+<div class="figure">
+<img alt="https://lh6.googleusercontent.com/nORGdWG0gR3bkqwVj37REWRoxTjrybp6s9xqB8CMRfrHACmpwoEdpYoWFDKWKdacclWcxNyC6JMJl9xFaVM8pYGMuw2PIIkLvvFguzkc8W9J0GOzKbrPJwEXIo2n4fxoxluVUdA" src="https://lh6.googleusercontent.com/nORGdWG0gR3bkqwVj37REWRoxTjrybp6s9xqB8CMRfrHACmpwoEdpYoWFDKWKdacclWcxNyC6JMJl9xFaVM8pYGMuw2PIIkLvvFguzkc8W9J0GOzKbrPJwEXIo2n4fxoxluVUdA" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Cài đặt Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

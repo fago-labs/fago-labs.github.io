@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ovs-ofctl: quản lý OpenFlow switch &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ovs-ofctl: quản lý OpenFlow switch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ovs/CLI/ovs-ofctl.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ovs-ofctl-quan-ly-openflow-switch">
+<h1>ovs-ofctl: quản lý OpenFlow switch<a class="headerlink" href="#ovs-ofctl-quan-ly-openflow-switch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cach-su-dung">
+<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ovs-ofctl</span> <span class="pre">[options]</span> <span class="pre">command</span> <span class="pre">[switch]</span> <span class="pre">[args...]</span></code></p>
+<div class="section" id="for-openflow-switches">
+<h3>For OpenFlow switches:<a class="headerlink" href="#for-openflow-switches" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">SWITCH</span></code>           -      hiện thông tin  OpenFlow của SWITCH (bridge hoặc socket)</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-desc</span> <span class="pre">SWITCH</span></code>       -    hiện description của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-tables</span> <span class="pre">SWITCH</span></code>     -     hiện số liệu trong bảng của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-table-features</span> <span class="pre">SWITCH</span></code> - hiện đặc tính của bảng của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-port</span> <span class="pre">SWITCH</span> <span class="pre">IFACE</span> <span class="pre">ACT</span></code> -  sửa đổi behavior của port</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-table</span> <span class="pre">SWITCH</span> <span class="pre">MOD</span></code>     -   sửa đổi behavior của flow table</p>
+<p><code class="docutils literal notranslate"><span class="pre">get-frags</span> <span class="pre">SWITCH</span></code>       -     hiện hành vi xử lý phân mảnh</p>
+<p><code class="docutils literal notranslate"><span class="pre">set-frags</span> <span class="pre">SWITCH</span> <span class="pre">FRAG_MODE</span></code> - thiết lập hành vi xử lý phân mảnh</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-ports</span> <span class="pre">SWITCH</span> <span class="pre">[PORT]</span></code> -  hiện thông tin PORT của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-ports-desc</span> <span class="pre">SWITCH</span> <span class="pre">[PORT]</span></code> - hiện thông tin  PORT của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-flows</span> <span class="pre">SWITCH</span></code>      -     hiện tất cả flow entries của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-flows</span> <span class="pre">SWITCH</span> <span class="pre">FLOW</span></code>   -  hiện matching FLOWs của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-aggregate</span> <span class="pre">SWITCH</span> </code>    -  hiện thống kê aggregate flow của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-aggregate</span> <span class="pre">SWITCH</span> <span class="pre">FLOW</span></code> -  hiện aggregate stats for FLOWs</p>
+<p><code class="docutils literal notranslate"><span class="pre">queue-stats</span> <span class="pre">SWITCH</span> <span class="pre">[PORT</span> <span class="pre">[QUEUE]]</span></code> -  dump queue stats</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-flow</span> <span class="pre">SWITCH</span> <span class="pre">FLOW</span></code>     -   thêm flow được mô tả bởi FLOW vào SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-flows</span> <span class="pre">SWITCH</span> <span class="pre">FILE</span></code>    -   thêm flows từ FILE vào SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-flows</span> <span class="pre">SWITCH</span> <span class="pre">FLOW</span></code>    -   sửa đổi hành động matching flow</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-flows</span> <span class="pre">SWITCH</span> <span class="pre">[FLOW]</span></code>   -  xóa matching FLOWs</p>
+<p><code class="docutils literal notranslate"><span class="pre">replace-flows</span> <span class="pre">SWITCH</span> <span class="pre">FILE</span></code>  -  thay thế flow bằng các flow trong FILE</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff-flows</span> <span class="pre">SOURCE1</span> <span class="pre">SOURCE2</span></code> - so sánh flow từ hai nguồn SOURCE1 và SOURCE2</p>
+<p><code class="docutils literal notranslate"><span class="pre">packet-out</span> <span class="pre">SWITCH</span> <span class="pre">IN_PORT</span> <span class="pre">ACTIONS</span> <span class="pre">PACKET...</span></code>   -   thực thi ACTIONS trên PACKET</p>
+<p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">SWITCH</span> <span class="pre">[MISSLEN]</span> <span class="pre">[invalid_ttl]</span> <span class="pre">[watch:[...]]</span></code> -    hiện packets đã nhận từ SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">snoop</span> <span class="pre">SWITCH</span></code>              -  snoop on SWITCH and its controller</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-group</span> <span class="pre">SWITCH</span> <span class="pre">GROUP</span></code>    -  thêm group được mô tả bởi GROUP vào SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-groups</span> <span class="pre">SWITCH</span> <span class="pre">FILE</span></code>   -   thêm group từ FILE</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-group</span> <span class="pre">SWITCH</span> <span class="pre">GROUP</span></code>    -  sửa đổi group tên GROUP của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-groups</span> <span class="pre">SWITCH</span> <span class="pre">[GROUP]</span></code> -  xóa GROUP</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-group-features</span> <span class="pre">SWITCH</span></code> -  hiện thuộc tính các group trên SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-groups</span> <span class="pre">SWITCH</span> <span class="pre">[GROUP]</span></code> - hiện mô tả các group trên SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-group-stats</span> <span class="pre">SWITCH</span> <span class="pre">[GROUP]</span></code> - hiện số liệu thống kê của GROUP</p>
+<p><code class="docutils literal notranslate"><span class="pre">queue-get-config</span> <span class="pre">SWITCH</span> <span class="pre">PORT</span></code> - hiện thông tin hàng đợi của port</p>
+<p><code class="docutils literal notranslate"><span class="pre">add-meter</span> <span class="pre">SWITCH</span> <span class="pre">METER</span></code>   -   thêm meter mô tả bởi METER vào SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-meter</span> <span class="pre">SWITCH</span> <span class="pre">METER</span></code>   -   sửa đổi METER</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-meter</span> <span class="pre">SWITCH</span> <span class="pre">METER</span></code>  -    xóa METER</p>
+<p><code class="docutils literal notranslate"><span class="pre">del-meters</span> <span class="pre">SWITCH</span></code>      -     xóa tất cả meter của SWITCH</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-meter</span> <span class="pre">SWITCH</span> <span class="pre">METER</span></code>  -  hiện cấu hình METER</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-meters</span> <span class="pre">SWITCH</span></code>      -    hiện cấu hình tất cả metet</p>
+<p><code class="docutils literal notranslate"> <span class="pre">meter-stats</span> <span class="pre">SWITCH</span> <span class="pre">[METER]</span></code>-  hiện thống kê METER</p>
+<p><code class="docutils literal notranslate"><span class="pre">meter-features</span> <span class="pre">SWITCH</span></code>   -    hiện thuộc tính meter</p>
+</div>
+<div class="section" id="for-openflow-switches-and-controllers">
+<h3>For OpenFlow switches and controllers:<a class="headerlink" href="#for-openflow-switches-and-controllers" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">probe</span> <span class="pre">TARGET</span></code>         -       thăm dò xem TARGET có up không</p>
+<p><code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">TARGET</span> <span class="pre">[N]</span></code>      -       ping xem độ trễ bằng N-byte</p>
+<p><code class="docutils literal notranslate"><span class="pre">benchmark</span> <span class="pre">TARGET</span> <span class="pre">N</span> <span class="pre">COUNT</span></code> -   bandwidth of COUNT N-byte echos</p>
+<p><em>SWITCH or TARGET is an active OpenFlow connection method.</em></p>
+</div>
+<div class="section" id="other-commands">
+<h3>Other commands:<a class="headerlink" href="#other-commands" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ofp-parse</span> <span class="pre">FILE</span> </code>     -        hiện thông điệp đọc được từ FILE</p>
+<p><code class="docutils literal notranslate"><span class="pre">mod-temp-thresh</span> <span class="pre">SWITCH</span> <span class="pre">THRESHOLD</span></code> -  modify temperature threshold</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-temp-thresh</span> <span class="pre">SWITCH</span></code> -    print temperature threshold</p>
+<p><code class="docutils literal notranslate"><span class="pre">ofp-parse-pcap</span> <span class="pre">PCAP</span></code>     -    hiện OpenFlow đọc từ PCAP</p>
+<p><code class="docutils literal notranslate"><span class="pre">dump-tables-desc</span> <span class="pre">SWITCH</span></code> -    hiện mô tả bảng</p>
+<p><code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">SWITCH</span> <span class="pre">MSG</span></code>      -     gửi bundle messages</p>
+</div>
+<div class="section" id="active-openflow-connection-methods">
+<h3>Active OpenFlow connection methods:<a class="headerlink" href="#active-openflow-connection-methods" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">tcp:IP[:PORT]</span></code>     -      PORT (default: 6633) at remote IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">ssl:IP[:PORT]</span></code>      -     SSL PORT (default: 6633) at remote IP</p>
+<p><code class="docutils literal notranslate"><span class="pre">unix:FILE</span></code>         -      Unix domain socket named FILE</p>
+</div>
+<div class="section" id="pki-configuration-required-to-use-ssl">
+<h3>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--private-key=FILE</span></code> -  file with private key</p>
+<p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--certificate=FILE</span></code> - file with certificate for private key</p>
+<p><code class="docutils literal notranslate"><span class="pre">-C</span></code>, <code class="docutils literal notranslate"><span class="pre">--ca-cert=FILE</span></code>   -   file with peer CA certificate</p>
+</div>
+<div class="section" id="daemon-options">
+<h3>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--detach</span></code>        -        run in background as daemon</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-chdir</span></code>       -       do not chdir to ‘/’</p>
+<p><code class="docutils literal notranslate"><span class="pre">--pidfile[=FILE]</span></code>    -    create pidfile (default: /ovs/var/run/openvswitch/ovs-ofctl.pid)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--overwrite-pidfile</span></code>  -   with –pidfile, start even if already running</p>
+</div>
+<div class="section" id="openflow-version-options">
+<h3>OpenFlow version options:<a class="headerlink" href="#openflow-version-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>      -     hiện thông tin phiên bản</p>
+<p><code class="docutils literal notranslate"><span class="pre">-O</span></code>, <code class="docutils literal notranslate"><span class="pre">--protocols</span></code>    -     cho phép phiên bản OpenFlow nào      (default: OpenFlow10, OpenFlow11, OpenFlow12, OpenFlow13, OpenFlow14)</p>
+</div>
+<div class="section" id="logging-options">
+<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  đặt logging levels</p>
+<p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>       -     đặt maximum verbosity level</p>
+<p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>     -   cho phép ghi log vào FILE        (default: /ovs/var/log/openvswitch/ovs-ofctl.log)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> -  đồng thời gửi syslog msgs tới HOST:PORT qua UDP</p>
+</div>
+<div class="section" id="other-options">
+<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--strict</span></code>           -         use strict match for flow commands</p>
+<p><code class="docutils literal notranslate"><span class="pre">--readd</span></code>             -        thay thế các flow không thay đổi</p>
+<p><code class="docutils literal notranslate"><span class="pre">-F</span></code>, <code class="docutils literal notranslate"><span class="pre">--flow-format=FORMAT</span></code>  -  ép định dạng flow</p>
+<p><code class="docutils literal notranslate"><span class="pre">-P</span></code>, <code class="docutils literal notranslate"><span class="pre">--packet-in-format=FRMT</span></code> - ép định dạng packet</p>
+<p><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--more</span></code>         -         nhiều thông tin chi tiết hơn</p>
+<p><code class="docutils literal notranslate"><span class="pre">--timestamp</span></code>          -       (monitor, snoop) hiện timestamps</p>
+<p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--timeout=SECS</span></code>     -     loại bỏ sau SECS giây</p>
+<p><code class="docutils literal notranslate"><span class="pre">--sort[=field]</span></code>          -     sắp xếp theo thứ tự tăng dần</p>
+<p><code class="docutils literal notranslate"><span class="pre">--rsort[=field]</span></code>         -     sắp xếp theo thứ tự giảm dần</p>
+<p><code class="docutils literal notranslate"><span class="pre">--unixctl=SOCKET</span></code>       -     đặt tên control socket</p>
+<p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>           -       hiện thông tin hỗ trợ</p>
+<p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>        -       hiện thông tin phiên bản</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
