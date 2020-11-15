@@ -46,3 +46,11 @@ Kubernetes
    :maxdepth: 2
 
    k8s/k8s
+   
+Openstack
+==================
+
+.. toctree::
+   :maxdepth: 2
+
+   Openstack/openstack

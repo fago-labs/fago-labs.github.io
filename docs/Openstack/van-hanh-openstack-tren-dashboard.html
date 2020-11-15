@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Vận hành Openstack trên Dashboard &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Cài đặt Openstack" href="cai-dat-openstack.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="openstack.html">Openstack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gioi-thieu-chung.html">Giới thiệu chung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gioi-thieu-ve-openstack.html">Giới thiệu về Openstack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cai-dat-openstack.html">Cài đặt Openstack</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vận hành Openstack trên Dashboard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#network-management">Network Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tao-provider-network">Tạo Provider Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tao-tenant-network">Tạo Tenant Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tao-tenant-router">Tạo Tenant Router</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tao-floating-ip-de-truy-cap-instance-tu-mang-ngoai">Tạo Floating IP để truy cập instance từ mạng ngoài</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#instance-management">Instance Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tao-flavor-cloud-images-keypair">Tạo flavor, cloud images, keypair</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tao-security-group">Tạo Security Group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tao-instance">Tạo instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#user-project-management">User, Project Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quan-ly-user">Quản lý user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quan-ly-project">Quản lý project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quota-cho-cac-project">Quota cho các project</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="openstack.html">Openstack</a> &raquo;</li>
+        
+      <li>Vận hành Openstack trên Dashboard</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Openstack/van-hanh-openstack-tren-dashboard.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="van-hanh-openstack-tren-dashboard">
+<h1>Vận hành Openstack trên Dashboard<a class="headerlink" href="#van-hanh-openstack-tren-dashboard" title="Permalink to this headline">¶</a></h1>
+<p>OpenStack Dashboard là một giao diện dựa trên web cho phép bạn quản lý các
+tài nguyên và dịch vụ của OpenStack. Bảng điều khiển cho phép bạn tương tác với bộ
+điều khiển đám mây OpenStack Compute bằng cách sử dụng các API OpenStack.</p>
+<p>Để truy cập vào OpenStack Dashboard thì mở trình duyệt lên, truy cập vào địa
+chỉ host của OpenStack và đăng nhập với username: admin và password đã cài đặt
+trong file local.conf.</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98481954-abbd0c00-2230-11eb-9270-b0fb7814526c.png" src="https://user-images.githubusercontent.com/65669673/98481954-abbd0c00-2230-11eb-9270-b0fb7814526c.png" />
+</div>
+<div class="section" id="network-management">
+<h2>Network Management<a class="headerlink" href="#network-management" title="Permalink to this headline">¶</a></h2>
+<p>Dịch vụ Mạng OpenStack cung cấp một hệ thống có thể mở rộng để quản lý kết
+nối mạng trong triển khai đám mây OpenStack. Nó có thể dễ dàng và nhanh chóng
+phản ứng với các nhu cầu mạng thay đổi.</p>
+<div class="section" id="tao-provider-network">
+<h3>Tạo Provider Network<a class="headerlink" href="#tao-provider-network" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo provider network truy cập vào Admin &gt; Network &gt; Networks &gt; Create Network</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482058-4b7a9a00-2231-11eb-9ad5-7993eab957a9.png" src="https://user-images.githubusercontent.com/65669673/98482058-4b7a9a00-2231-11eb-9ad5-7993eab957a9.png" />
+</div>
+<p>Sau đó thiết lập thông tin cho mạng</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482088-7664ee00-2231-11eb-9f52-a8fbc2205c37.png" src="https://user-images.githubusercontent.com/65669673/98482088-7664ee00-2231-11eb-9f52-a8fbc2205c37.png" />
+</div>
+<p>Tiếp đến tạo subnet cho mạng</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482118-aad8aa00-2231-11eb-8b11-ad774ee9c761.png" src="https://user-images.githubusercontent.com/65669673/98482118-aad8aa00-2231-11eb-8b11-ad774ee9c761.png" />
+</div>
+<p>Cuối cùng cấu hình chi tiết cho mạng</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482129-c2b02e00-2231-11eb-9c05-7ed93c2e3a02.png" src="https://user-images.githubusercontent.com/65669673/98482129-c2b02e00-2231-11eb-9c05-7ed93c2e3a02.png" />
+</div>
+</div>
+<div class="section" id="tao-tenant-network">
+<h3>Tạo Tenant Network<a class="headerlink" href="#tao-tenant-network" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo tenant network thì cũng tương tự như tạo provider network chỉ thay đổi
+tên thông tin mạng và subnet</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482147-f8551700-2231-11eb-8257-3ea765e3b3d6.png" src="https://user-images.githubusercontent.com/65669673/98482147-f8551700-2231-11eb-8257-3ea765e3b3d6.png" />
+</div>
+</div>
+<div class="section" id="tao-tenant-router">
+<h3>Tạo Tenant Router<a class="headerlink" href="#tao-tenant-router" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo tenant router truy cập vào Project &gt; Network &gt; Routers &gt; Create Router</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482178-4538ed80-2232-11eb-8311-da0e34ae7df5.png" src="https://user-images.githubusercontent.com/65669673/98482178-4538ed80-2232-11eb-8311-da0e34ae7df5.png" />
+</div>
+<p>Sau đó thiết lập thông tin cho router</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482449-11f75e00-2234-11eb-8c2d-96ee2b048192.png" src="https://user-images.githubusercontent.com/65669673/98482449-11f75e00-2234-11eb-8c2d-96ee2b048192.png" />
+</div>
+<p>Để thêm interface của tenant network vào router vừa tạo, chọn router “pro-ten”, chuyển qua tab Interfaces, chọn Add Interface</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482463-305d5980-2234-11eb-8e3a-820b8cfde2d4.png" src="https://user-images.githubusercontent.com/65669673/98482463-305d5980-2234-11eb-8e3a-820b8cfde2d4.png" />
+</div>
+</div>
+<div class="section" id="tao-floating-ip-de-truy-cap-instance-tu-mang-ngoai">
+<h3>Tạo Floating IP để truy cập instance từ mạng ngoài<a class="headerlink" href="#tao-floating-ip-de-truy-cap-instance-tu-mang-ngoai" title="Permalink to this headline">¶</a></h3>
+<p>Để gán floating ip cho một instance truy cập vào Project &gt; Instances &gt; Associate Floating IP</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482464-318e8680-2234-11eb-93f3-318146946d72.png" src="https://user-images.githubusercontent.com/65669673/98482464-318e8680-2234-11eb-93f3-318146946d72.png" />
+</div>
+<p>Chọn biểu tượng dấu “+” để tạo mới floating ip</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482465-32bfb380-2234-11eb-8cc5-53464116bbe9.png" src="https://user-images.githubusercontent.com/65669673/98482465-32bfb380-2234-11eb-8cc5-53464116bbe9.png" />
+</div>
+<p>Chọn provider-net, sau đó chọn Allocate IP</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482467-33f0e080-2234-11eb-8943-05cfdf31cbeb.png" src="https://user-images.githubusercontent.com/65669673/98482467-33f0e080-2234-11eb-8943-05cfdf31cbeb.png" />
+</div>
+<p>Sau đó chọn Associate</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482468-35220d80-2234-11eb-989a-a9c9b86e9411.png" src="https://user-images.githubusercontent.com/65669673/98482468-35220d80-2234-11eb-989a-a9c9b86e9411.png" />
+</div>
+</div>
+</div>
+<div class="section" id="instance-management">
+<h2>Instance Management<a class="headerlink" href="#instance-management" title="Permalink to this headline">¶</a></h2>
+<p>Là người dùng quản trị, có thể quản lý các instance cho người dùng trong các
+dự án khác nhau. Có thể xem, chỉnh sửa, thực hiện khởi động lại, tạo snapshot và di
+chuyển các instance.</p>
+<div class="section" id="tao-flavor-cloud-images-keypair">
+<h3>Tạo flavor, cloud images, keypair<a class="headerlink" href="#tao-flavor-cloud-images-keypair" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo flavor, vào Admin &gt; Compute &gt; Flavors &gt; Create Flavor</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482470-36533a80-2234-11eb-8969-c930de7ecddb.png" src="https://user-images.githubusercontent.com/65669673/98482470-36533a80-2234-11eb-8969-c930de7ecddb.png" />
+</div>
+<p>Để tạo Image, vào Admin &gt; Compute &gt; Images &gt; Create Image và thiết lập như sau (sử dụng cloud image như trên trang chủ khuyến cáo)</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482472-37846780-2234-11eb-90dd-44395058b696.png" src="https://user-images.githubusercontent.com/65669673/98482472-37846780-2234-11eb-90dd-44395058b696.png" />
+</div>
+<p>Để tạo keypair vào Project &gt; Compute &gt; Key Pairs &gt; Create Key Pair. Sau khi tạo xong ssh key, trình duyệt sẽ tự động tải về file key dùng để ssh.</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482473-394e2b00-2234-11eb-975e-ef80c50612a3.png" src="https://user-images.githubusercontent.com/65669673/98482473-394e2b00-2234-11eb-975e-ef80c50612a3.png" />
+</div>
+</div>
+<div class="section" id="tao-security-group">
+<h3>Tạo Security Group<a class="headerlink" href="#tao-security-group" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo Security Group vào Project &gt; Network &gt; Security Groups &gt; Create Security Group</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482577-f476c400-2234-11eb-831d-478ccd000b23.png" src="https://user-images.githubusercontent.com/65669673/98482577-f476c400-2234-11eb-831d-478ccd000b23.png" />
+</div>
+<p>Sau đó cần thêm các rule vào Security Group mới tạo. Vào Manage Rules của “test”, rồi chọn Add Rule</p>
+<p>Thêm rule All ICMP để có thể ping instance</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482579-f5a7f100-2234-11eb-82a9-03d2c9134cd6.png" src="https://user-images.githubusercontent.com/65669673/98482579-f5a7f100-2234-11eb-82a9-03d2c9134cd6.png" />
+</div>
+<p>Thêm rule SSH để có thể ssh instance</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482581-f771b480-2234-11eb-9af7-41ebb3e8c189.png" src="https://user-images.githubusercontent.com/65669673/98482581-f771b480-2234-11eb-9af7-41ebb3e8c189.png" />
+</div>
+</div>
+<div class="section" id="tao-instance">
+<h3>Tạo instance<a class="headerlink" href="#tao-instance" title="Permalink to this headline">¶</a></h3>
+<p>Để tạo Instance, vào Project &gt; Compute &gt; Instances &gt; Launch Instance. Sau đó cài đặt các thông số cho instance</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482582-f8a2e180-2234-11eb-8fdc-7bae99f7e1fa.png" src="https://user-images.githubusercontent.com/65669673/98482582-f8a2e180-2234-11eb-8fdc-7bae99f7e1fa.png" />
+</div>
+<p>Chọn Source</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482584-f9d40e80-2234-11eb-8d9e-63b244d77eb9.png" src="https://user-images.githubusercontent.com/65669673/98482584-f9d40e80-2234-11eb-8d9e-63b244d77eb9.png" />
+</div>
+<p>Chọn flavor</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482585-fa6ca500-2234-11eb-80a7-400ebba9649a.png" src="https://user-images.githubusercontent.com/65669673/98482585-fa6ca500-2234-11eb-80a7-400ebba9649a.png" />
+</div>
+<p>Chọn network</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482587-fcceff00-2234-11eb-972b-7a423b60b86e.png" src="https://user-images.githubusercontent.com/65669673/98482587-fcceff00-2234-11eb-972b-7a423b60b86e.png" />
+</div>
+<p>Chọn Security Groups</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482588-fe002c00-2234-11eb-81f9-9d615961c0d4.png" src="https://user-images.githubusercontent.com/65669673/98482588-fe002c00-2234-11eb-81f9-9d615961c0d4.png" />
+</div>
+<p>Chọn Key Pair</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482589-ff315900-2234-11eb-94eb-dc02ed5a1374.png" src="https://user-images.githubusercontent.com/65669673/98482589-ff315900-2234-11eb-94eb-dc02ed5a1374.png" />
+</div>
+<p>Sau khi đã thiết lập xong thông số cho instance thì chọn Launch Instance để khởi tạo instance</p>
+</div>
+</div>
+<div class="section" id="user-project-management">
+<h2>User, Project Management<a class="headerlink" href="#user-project-management" title="Permalink to this headline">¶</a></h2>
+<p>Quản trị viên OpenStack có thể tạo dự án và tạo tài khoản cho người dùng mới
+bằng OpenStack Dashboard. Dự án sở hữu các tài nguyên cụ thể trong môi trường
+OpenStack của bạn. Bạn có thể liên kết người dùng với các vai trò, dự án hoặc cả hai.</p>
+<div class="section" id="quan-ly-user">
+<h3>Quản lý user<a class="headerlink" href="#quan-ly-user" title="Permalink to this headline">¶</a></h3>
+<p>Để quản lý 1 người dùng ta vào Identity &gt; Users</p>
+<ul class="simple">
+<li>Để thêm 1 người dùng vào Create user</li>
+<li>Để chỉnh sửa 1 người dùng vào Edit (chọn vào phần người dùng muốn sửa)</li>
+<li>Để đổi mật khẩu người dùng chọn Change Password trên thanh hành động của người dùng đó</li>
+<li>Để xóa 1 người dùng thì chọn người dùng muốn xóa rồi ấn Delete Users</li>
+</ul>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482592-00628600-2235-11eb-8dcb-d2ae942cff3f.png" src="https://user-images.githubusercontent.com/65669673/98482592-00628600-2235-11eb-8dcb-d2ae942cff3f.png" />
+</div>
+</div>
+<div class="section" id="quan-ly-project">
+<h3>Quản lý project<a class="headerlink" href="#quan-ly-project" title="Permalink to this headline">¶</a></h3>
+<p>Để quản lý project ta vào Identity &gt; Projects</p>
+<ul class="simple">
+<li>Để thêm 1 project vào Create Project</li>
+<li>Để chỉnh sửa project chọn thanh hành động của project muốn sửa và chọn tùy chọn cần sửa</li>
+<li>Để xóa 1 project thì chọn project muốn xóa rồi ấn Delete Projects</li>
+</ul>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482593-0193b300-2235-11eb-9ae6-b73caace01d0.png" src="https://user-images.githubusercontent.com/65669673/98482593-0193b300-2235-11eb-9ae6-b73caace01d0.png" />
+</div>
+</div>
+<div class="section" id="quota-cho-cac-project">
+<h3>Quota cho các project<a class="headerlink" href="#quota-cho-cac-project" title="Permalink to this headline">¶</a></h3>
+<p>Để ngăn dung lượng hệ thống bị cạn kiệt mà không có thông báo, bạn có thể
+thiết lập các quotas - là giới hạn hoạt động. Ví dụ: có thể kiểm soát số lượng gigabyte
+cho phép cho mỗi dự án để tài nguyên đám mây được tối ưu hóa. Quota có thể được
+thực thi ở cả cấp độ dự án và người dùng dự án.</p>
+<p>Sử dụng Dashboard, bạn có thể xem quota của Compute và Block Storage mặc định
+cho các dự án mới, cũng như cập nhật quota cho các dự án hiện có.</p>
+<p>Để xem default project quotas vào Admin &gt; System &gt; Defaults</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482594-02c4e000-2235-11eb-883e-940d023c9675.png" src="https://user-images.githubusercontent.com/65669673/98482594-02c4e000-2235-11eb-883e-940d023c9675.png" />
+</div>
+<p>Để Update project quotas vào Admin &gt; System &gt; Defaults &gt; Update Defaults</p>
+<div class="figure">
+<img alt="https://user-images.githubusercontent.com/65669673/98482597-048ea380-2235-11eb-9663-39d30f9f1211.png" src="https://user-images.githubusercontent.com/65669673/98482597-048ea380-2235-11eb-9663-39d30f9f1211.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="cai-dat-openstack.html" class="btn btn-neutral float-left" title="Cài đặt Openstack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
