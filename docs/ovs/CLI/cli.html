@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CLI &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovs-appctl - truy vấn và điều khiển Open vSwitch daemon" href="ovs-appctl.html" />
+    <link rel="prev" title="Switch 24 port" href="../switch24port.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CLI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Openstack/openstack.html">Openstack</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+      <li>CLI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/ovs/CLI/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cli">
+<h1>CLI<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovs-appctl.html#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-appctl.html#targets">Targets:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-appctl.html#common-commands">Common commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-appctl.html#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#valid-commands-are">Valid commands are:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#active-server-connection-methods">Active SERVER connection methods:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#passive-server-connection-methods">Passive SERVER connection methods:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#ssl-options">SSL options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#output-formatting-options">Output formatting options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#daemon-options">Daemon options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#id1">Output formatting options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#id2">Daemon options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#logging-options">Logging options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-client.html#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-tool.html#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-tool.html#command">Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-tool.html#logging-options">Logging options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovsdb-tool.html#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#command">Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#logging-options">Logging options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#options-for-show-and-mod-flow">Options for show and mod-flow:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#options-for-dump-flows">Options for dump-flows:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#options-for-mod-flow">Options for mod-flow:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-dpctl.html#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#for-openflow-switches">For OpenFlow switches:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#for-openflow-switches-and-controllers">For OpenFlow switches and controllers:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#other-commands">Other commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#active-openflow-connection-methods">Active OpenFlow connection methods:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#daemon-options">Daemon options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#openflow-version-options">OpenFlow version options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#logging-options">Logging options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-ofctl.html#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#cach-su-dung">Cách sử dụng :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#open-vswitch-commands">Open vSwitch commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#bridge-commands">Bridge commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#port-commands-a-bond-is-considered-to-be-a-single-port-mot-lien-ket-duoc-coi-la-mot-cong-duy-nhat">Port commands (a bond is considered to be a single port - một liên kết được coi là một cổng duy nhất):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#interface-commands-a-bond-consists-of-multiple-interfaces-mot-lien-ket-bao-gom-nhieu-giao-dien">Interface commands (a bond consists of multiple interfaces - một liên kết bao gồm nhiều giao diện):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#controller-commands">Controller commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#manager-commands">Manager commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#ssl-commands">SSL commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#auto-attach-commands">Auto Attach commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#switch-commands">Switch commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#database-commands">Database commands:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#options">Options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#output-formatting-options">Output formatting options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#logging-options">Logging options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#active-database-connection-methods">Active database connection methods:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#passive-database-connection-methods">Passive database connection methods:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#ssl-options">SSL options:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ovs-vsctl.html#other-options">Other options:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovs-appctl.html" class="btn btn-neutral float-right" title="ovs-appctl - truy vấn và điều khiển Open vSwitch daemon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../switch24port.html" class="btn btn-neutral float-left" title="Switch 24 port" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

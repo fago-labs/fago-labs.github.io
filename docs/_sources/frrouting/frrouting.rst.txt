@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 FRRouting Explaination
-==================
+======================
 
 .. toctree::
    :maxdepth: 2

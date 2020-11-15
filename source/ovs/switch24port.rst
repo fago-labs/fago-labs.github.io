@@ -1,8 +1,4 @@
-
-Open vSwitch
-===========
-
-switch 24 port
+Switch 24 port
 ================
 
 
@@ -24,7 +20,7 @@ switch 24 port
 
 
 2. Tạo bridge switch1 ở fail-secure mode để Open Flow table rỗng khi khởi tạo
-------------------
+------------------------------------------------------------------------------------
 
 ::
 
@@ -32,7 +28,7 @@ switch 24 port
 
 
 3. Tạo các port cho swtich với tùy chọn ofport_request (cần tạo các port trên máy trước)
------------------------
+-----------------------------------------------------------------------------------------------
 
 ::
 
@@ -42,7 +38,7 @@ switch 24 port
     done    
 
 4. Bật giao thức STP
------------------
+-----------------------
 
 ::
 
@@ -50,7 +46,7 @@ switch 24 port
 
 
 5. Thêm các flow table vào switch
-----------------
+----------------------------------------
 
 ::
 

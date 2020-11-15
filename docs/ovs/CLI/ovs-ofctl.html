@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovs-vsctl : truy vấn và cấu hình ovs-vswitchd" href="ovs-vsctl.html" />
+    <link rel="prev" title="ovs-dpctl: quản lý Open vSwitch datapath" href="ovs-dpctl.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,34 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovs-ofctl: quản lý OpenFlow switch</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#for-openflow-switches">For OpenFlow switches:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#for-openflow-switches-and-controllers">For OpenFlow switches and controllers:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-commands">Other commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#active-openflow-connection-methods">Active OpenFlow connection methods:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#daemon-options">Daemon options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openflow-version-options">OpenFlow version options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-options">Logging options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,6 +168,10 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
       <li>ovs-ofctl: quản lý OpenFlow switch</li>
     
     
@@ -162,10 +194,11 @@
   <div class="section" id="ovs-ofctl-quan-ly-openflow-switch">
 <h1>ovs-ofctl: quản lý OpenFlow switch<a class="headerlink" href="#ovs-ofctl-quan-ly-openflow-switch" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
-<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<h2>Cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ovs-ofctl</span> <span class="pre">[options]</span> <span class="pre">command</span> <span class="pre">[switch]</span> <span class="pre">[args...]</span></code></p>
+</div>
 <div class="section" id="for-openflow-switches">
-<h3>For OpenFlow switches:<a class="headerlink" href="#for-openflow-switches" title="Permalink to this headline">¶</a></h3>
+<h2>For OpenFlow switches:<a class="headerlink" href="#for-openflow-switches" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">SWITCH</span></code>           -      hiện thông tin  OpenFlow của SWITCH (bridge hoặc socket)</p>
 <p><code class="docutils literal notranslate"><span class="pre">dump-desc</span> <span class="pre">SWITCH</span></code>       -    hiện description của SWITCH</p>
 <p><code class="docutils literal notranslate"><span class="pre">dump-tables</span> <span class="pre">SWITCH</span></code>     -     hiện số liệu trong bảng của SWITCH</p>
@@ -208,14 +241,14 @@
 <p><code class="docutils literal notranslate"><span class="pre">meter-features</span> <span class="pre">SWITCH</span></code>   -    hiện thuộc tính meter</p>
 </div>
 <div class="section" id="for-openflow-switches-and-controllers">
-<h3>For OpenFlow switches and controllers:<a class="headerlink" href="#for-openflow-switches-and-controllers" title="Permalink to this headline">¶</a></h3>
+<h2>For OpenFlow switches and controllers:<a class="headerlink" href="#for-openflow-switches-and-controllers" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">probe</span> <span class="pre">TARGET</span></code>         -       thăm dò xem TARGET có up không</p>
 <p><code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">TARGET</span> <span class="pre">[N]</span></code>      -       ping xem độ trễ bằng N-byte</p>
 <p><code class="docutils literal notranslate"><span class="pre">benchmark</span> <span class="pre">TARGET</span> <span class="pre">N</span> <span class="pre">COUNT</span></code> -   bandwidth of COUNT N-byte echos</p>
 <p><em>SWITCH or TARGET is an active OpenFlow connection method.</em></p>
 </div>
 <div class="section" id="other-commands">
-<h3>Other commands:<a class="headerlink" href="#other-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Other commands:<a class="headerlink" href="#other-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ofp-parse</span> <span class="pre">FILE</span> </code>     -        hiện thông điệp đọc được từ FILE</p>
 <p><code class="docutils literal notranslate"><span class="pre">mod-temp-thresh</span> <span class="pre">SWITCH</span> <span class="pre">THRESHOLD</span></code> -  modify temperature threshold</p>
 <p><code class="docutils literal notranslate"><span class="pre">dump-temp-thresh</span> <span class="pre">SWITCH</span></code> -    print temperature threshold</p>
@@ -224,38 +257,38 @@
 <p><code class="docutils literal notranslate"><span class="pre">bundle</span> <span class="pre">SWITCH</span> <span class="pre">MSG</span></code>      -     gửi bundle messages</p>
 </div>
 <div class="section" id="active-openflow-connection-methods">
-<h3>Active OpenFlow connection methods:<a class="headerlink" href="#active-openflow-connection-methods" title="Permalink to this headline">¶</a></h3>
+<h2>Active OpenFlow connection methods:<a class="headerlink" href="#active-openflow-connection-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">tcp:IP[:PORT]</span></code>     -      PORT (default: 6633) at remote IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">ssl:IP[:PORT]</span></code>      -     SSL PORT (default: 6633) at remote IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">unix:FILE</span></code>         -      Unix domain socket named FILE</p>
 </div>
 <div class="section" id="pki-configuration-required-to-use-ssl">
-<h3>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h3>
+<h2>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--private-key=FILE</span></code> -  file with private key</p>
 <p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--certificate=FILE</span></code> - file with certificate for private key</p>
 <p><code class="docutils literal notranslate"><span class="pre">-C</span></code>, <code class="docutils literal notranslate"><span class="pre">--ca-cert=FILE</span></code>   -   file with peer CA certificate</p>
 </div>
 <div class="section" id="daemon-options">
-<h3>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h3>
+<h2>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--detach</span></code>        -        run in background as daemon</p>
 <p><code class="docutils literal notranslate"><span class="pre">--no-chdir</span></code>       -       do not chdir to ‘/’</p>
 <p><code class="docutils literal notranslate"><span class="pre">--pidfile[=FILE]</span></code>    -    create pidfile (default: /ovs/var/run/openvswitch/ovs-ofctl.pid)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--overwrite-pidfile</span></code>  -   with –pidfile, start even if already running</p>
 </div>
 <div class="section" id="openflow-version-options">
-<h3>OpenFlow version options:<a class="headerlink" href="#openflow-version-options" title="Permalink to this headline">¶</a></h3>
+<h2>OpenFlow version options:<a class="headerlink" href="#openflow-version-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>      -     hiện thông tin phiên bản</p>
 <p><code class="docutils literal notranslate"><span class="pre">-O</span></code>, <code class="docutils literal notranslate"><span class="pre">--protocols</span></code>    -     cho phép phiên bản OpenFlow nào      (default: OpenFlow10, OpenFlow11, OpenFlow12, OpenFlow13, OpenFlow14)</p>
 </div>
 <div class="section" id="logging-options">
-<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<h2>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  đặt logging levels</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>       -     đặt maximum verbosity level</p>
 <p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>     -   cho phép ghi log vào FILE        (default: /ovs/var/log/openvswitch/ovs-ofctl.log)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> -  đồng thời gửi syslog msgs tới HOST:PORT qua UDP</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--strict</span></code>           -         use strict match for flow commands</p>
 <p><code class="docutils literal notranslate"><span class="pre">--readd</span></code>             -        thay thế các flow không thay đổi</p>
 <p><code class="docutils literal notranslate"><span class="pre">-F</span></code>, <code class="docutils literal notranslate"><span class="pre">--flow-format=FORMAT</span></code>  -  ép định dạng flow</p>
@@ -270,13 +303,21 @@
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>        -       hiện thông tin phiên bản</p>
 </div>
 </div>
-</div>
 
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovs-vsctl.html" class="btn btn-neutral float-right" title="ovs-vsctl : truy vấn và cấu hình ovs-vswitchd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ovs-dpctl.html" class="btn btn-neutral float-left" title="ovs-dpctl: quản lý Open vSwitch datapath" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

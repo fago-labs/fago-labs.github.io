@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovsdb-tool: quản lý Open vSwitch database" href="ovsdb-tool.html" />
+    <link rel="prev" title="ovs-appctl - truy vấn và điều khiển Open vSwitch daemon" href="ovs-appctl.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,36 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovsdb-client: Open vSwitch database JSON-RPC client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#valid-commands-are">Valid commands are:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#active-server-connection-methods">Active SERVER connection methods:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#passive-server-connection-methods">Passive SERVER connection methods:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-options">SSL options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-formatting-options">Output formatting options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#daemon-options">Daemon options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Output formatting options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Daemon options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-options">Logging options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,6 +170,10 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
       <li>ovsdb-client: Open vSwitch database JSON-RPC client</li>
     
     
@@ -162,10 +196,11 @@
   <div class="section" id="ovsdb-client-open-vswitch-database-json-rpc-client">
 <h1>ovsdb-client: Open vSwitch database JSON-RPC client<a class="headerlink" href="#ovsdb-client-open-vswitch-database-json-rpc-client" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
-<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<h2>Cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ovsdb-client</span> <span class="pre">[OPTIONS]</span> <span class="pre">COMMAND</span> <span class="pre">[ARG...]</span></code></p>
+</div>
 <div class="section" id="valid-commands-are">
-<h3>Valid commands are:<a class="headerlink" href="#valid-commands-are" title="Permalink to this headline">¶</a></h3>
+<h2>Valid commands are:<a class="headerlink" href="#valid-commands-are" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">list-dbs</span> <span class="pre">[SERVER]</span></code> -   liệt kê databases có sẵn trên SERVER</p>
 <p><code class="docutils literal notranslate"><span class="pre">get-schema</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> -  truy xuất lược đồ cho DATABASE từ SERVER</p>
 <p><code class="docutils literal notranslate"><span class="pre">get-schema-version</span> <span class="pre">[SERVER]</span> <span class="pre">[DATABASE]</span></code> -  truy xuất lược đồ cho DATABASE từ SERVER và chỉ báo cáo  số phiên bản trên stdout</p>
@@ -190,31 +225,31 @@
 <p><em>The default DATABASE is Open_vSwitch.</em></p>
 </div>
 <div class="section" id="active-server-connection-methods">
-<h3>Active SERVER connection methods:<a class="headerlink" href="#active-server-connection-methods" title="Permalink to this headline">¶</a></h3>
+<h2>Active SERVER connection methods:<a class="headerlink" href="#active-server-connection-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">tcp:IP:PORT</span></code>       -     PORT at remote IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">ssl:IP:PORT</span></code>       -      SSL PORT at remote IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">unix:FILE</span></code>         -      Unix domain socket named FILE</p>
 </div>
 <div class="section" id="passive-server-connection-methods">
-<h3>Passive SERVER connection methods:<a class="headerlink" href="#passive-server-connection-methods" title="Permalink to this headline">¶</a></h3>
+<h2>Passive SERVER connection methods:<a class="headerlink" href="#passive-server-connection-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ptcp:PORT[:IP]</span></code>     -     listen to TCP PORT on IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">pssl:PORT[:IP]</span></code>     -     listen for SSL on PORT on IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">punix:FILE</span></code>         -     listen on Unix domain socket FILE</p>
 </div>
 <div class="section" id="pki-configuration-required-to-use-ssl">
-<h3>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h3>
+<h2>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--private-key=FILE</span></code> - file with private key</p>
 <p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--certificate=FILE</span></code> - file with certificate for private key</p>
 <p><code class="docutils literal notranslate"><span class="pre">-C</span></code>, <code class="docutils literal notranslate"><span class="pre">--ca-cert=FILE</span></code>    -  file with peer CA certificate</p>
 <p><code class="docutils literal notranslate"><span class="pre">--bootstrap-ca-cert=FILE</span></code> - file with peer CA certificate to read or create</p>
 </div>
 <div class="section" id="ssl-options">
-<h3>SSL options:<a class="headerlink" href="#ssl-options" title="Permalink to this headline">¶</a></h3>
+<h2>SSL options:<a class="headerlink" href="#ssl-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--ssl-protocols=PROTOS</span></code> -  list of SSL protocols to enable</p>
 <p><code class="docutils literal notranslate"><span class="pre">--ssl-ciphers=CIPHERS</span></code> -  list of SSL ciphers to enableget-schema [SERVER] [DATABASE]</p>
 </div>
 <div class="section" id="output-formatting-options">
-<h3>Output formatting options:<a class="headerlink" href="#output-formatting-options" title="Permalink to this headline">¶</a></h3>
+<h2>Output formatting options:<a class="headerlink" href="#output-formatting-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--format=FORMAT</span></code>    -     set output formatting to FORMAT    (“table”, “html”, “csv”, or “json”)</p>
 <p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--data=FORMAT</span></code>     -      set table cell output formatting to  FORMAT (“string”, “bare”, or “json”)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--no-headings</span></code>      -         omit table heading row</p>
@@ -223,10 +258,10 @@
 <p><code class="docutils literal notranslate"><span class="pre">--timestamp</span></code>        -         timestamp “monitor” output</p>
 </div>
 <div class="section" id="daemon-options">
-<h3>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h3>
+<h2>Daemon options:<a class="headerlink" href="#daemon-options" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="id1">
-<h3>Output formatting options:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h2>Output formatting options:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--format=FORMAT</span></code>    -     set output formatting to FORMAT       (“table”, “html”, “csv”, or “json”)</p>
 <p><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--data=FORMAT</span></code>     -      set table cell output formatting to   FORMAT (“string”, “bare”, or “json”)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--no-headings</span></code>        -       omit table heading row</p>
@@ -235,7 +270,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">--timestamp</span></code>         -        timestamp “monitor” output</p>
 </div>
 <div class="section" id="id2">
-<h3>Daemon options:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h2>Daemon options:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--detach</span></code>        -        run in background as daemon</p>
 <p><code class="docutils literal notranslate"><span class="pre">--monitor</span></code>      -         creates a process to monitor this daemon</p>
 <p><code class="docutils literal notranslate"><span class="pre">--user=username[:group]</span></code> - changes the effective daemon user:group</p>
@@ -244,7 +279,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">--overwrite-pidfile</span> </code>  -  with –pidfile, start even if already running</p>
 </div>
 <div class="section" id="logging-options">
-<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<h2>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  set logging levels</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>       -     set maximum verbosity level</p>
 <p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span> </code>   -    enable logging to specified FILE  (default: /var/log/openvswitch/ovsdb-client.log)</p>
@@ -252,10 +287,9 @@
 <p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> - also send syslog msgs to HOST:PORT via UDP</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>         -         display this help message</p>
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>       -        display version information</p>
-</div>
 </div>
 </div>
 
@@ -264,6 +298,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovsdb-tool.html" class="btn btn-neutral float-right" title="ovsdb-tool: quản lý Open vSwitch database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ovs-appctl.html" class="btn btn-neutral float-left" title="ovs-appctl - truy vấn và điều khiển Open vSwitch daemon" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

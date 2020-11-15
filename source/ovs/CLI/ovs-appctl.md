@@ -1,6 +1,6 @@
-# `ovs-appctl` - truy vấn và điều khiển Open vSwitch daemon
+# ovs-appctl - truy vấn và điều khiển Open vSwitch daemon
 
-## cách sử dụng: 
+#### Cách sử dụng: 
 
 ```ovs-appctl [--target=target | -t target] command [arg...]```
 

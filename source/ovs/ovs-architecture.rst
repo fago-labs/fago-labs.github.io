@@ -1,7 +1,7 @@
-OVS Architecture
+Kiến trúc OVS
 ================
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-19.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-19.png
 
 
 
@@ -33,26 +33,26 @@ ovs-ovswitchd nhận OpenFlow messages từ OpenFlow controller và OVSDB-protoc
 
 Một hình minh họa khác chi tiết hơn:
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-36.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-36.png
 
 
 1. vswitchd
-------------
+----------------
 
 1.1. vswitchd Overview
---------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ovs-vswitchd nằm ở vị trí quan trọng của OVS, cần tương tác với OpenFlow controller, OVSDB, và kernel module.
 
 - ovs-vswitchd giao tiếp với:
 
-- - outside world sử dụng OpenFlow
+    - outside world sử dụng OpenFlow
 
-- - ovsdb-server sử dụng giao thức OVSDB protocol
+    - ovsdb-server sử dụng giao thức OVSDB protocol
 
-- - kernel thông qua netlink (tương tự như Unix socket domain)
+    - kernel thông qua netlink (tương tự như Unix socket domain)
 
-- - system thông qua abstract interface là netdev
+    - system thông qua abstract interface là netdev
 
 - Triển khai mirroring, bonding, và VLANs
 
@@ -60,8 +60,7 @@ ovs-vswitchd nằm ở vị trí quan trọng của OVS, cần tương tác vớ
 
 vswitch module được chia thành nhiều submodules/libraies:
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-44.png
-
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-44.png
 
 - ovs-vswitchd: vswitchd daemon
 
@@ -74,9 +73,9 @@ vswitch module được chia thành nhiều submodules/libraies:
 - netdev-provider:  OS- and hardware-specific interface to network devices
 
 1.2.  Key Data Structures
---------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-55.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-44-55.png
 
 - OVS bridges quản lý hai loại tài nguyên:
 
@@ -93,9 +92,10 @@ vswitch module được chia thành nhiều submodules/libraies:
 - - để quản lý network device : netdev, netdev-provider
 
 1.2.1. ofproto
-------------
+*************************
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-14.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-14.png
+
 
 - struct ofproto abstracts OpenFlow switches. Một ofproto instance là một OpenFlow switch (bridge).
 
@@ -110,7 +110,7 @@ vswitch module được chia thành nhiều submodules/libraies:
 - - struct ofgroup: thể hiện OpenFlow 1.1+ group trong một ofproto
 
 1.2.2. ofproto-provider
-----------------
+*************************************
 
 
 ofproto class structure, được xác định bởi mỗi một triển khai của ofproto (ovs bridge).
@@ -119,19 +119,20 @@ Một ofproto provider là những gì ofproto sử dụng để giám sát và 
 
 Open vSwitch có built-in ofproto provider tên là ofproto-dpif, được xây dựng ở phía trên để thao tác các datapath, được gọi là dpif. “datapath” là một flow table đơn giản.Khi một gói đến. datapath tìm kiếm nó trong flow table. Nếu có một kết quả phù hợp, thì nó sẽ thực hiện các hành động liên quan. Nếu không có kết quả phù hợp, datapath sẽ chuyển gói đến ofproto-dpif, nơi mà duy trì toàn bộ bảng luồng OpenFlow. Nếu gói phù hợp trong bảng luồng này, thì ofproto-dpif thực thi các hành động của nó và chèn một mục mới vào flow table của dpif. (Nếu không, ofproto-dpif chuyển gói đến ofproto để gửi gói OpenFlow controller, nếu như nó được cấu hình.)
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-25.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-25.png
 
 1.2.3. netdev
------------
+*************************************
+
 
 - Open vSwitch library, định nghĩa trong lib/netdev-provider.h, triển khai trong lib/netdev.c, xác định cách tương tác với các network devices, nghĩa là Ethernet interfaces.
 
 - Mỗi porttrên switch phải có một netdev tương ứng
 
 1.2.4. netdev-provider
--------------
+*************************************
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-35.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-35.png
 
 netdev provider triển khai OS- and hardware-specific interface to “network devices”, và ethernet device. Open vSwitch cần phải có khả năng mở mỗi port trên switch dưới dạng netdev, vì thế cần triển khai “netdev provider” hoạt động với hardware và software của switch.
 
@@ -192,9 +193,9 @@ netdev provider triển khai OS- and hardware-specific interface to “network d
 - - dpdk_vhost_client_class
 
 1.3. Call Flows
-------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-51.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-45-51.png
 
 - Bắt đầu, khởi tạo bridge module, lấy một số tham số cấu hình từ ovsdb
 
@@ -212,10 +213,10 @@ netdev provider triển khai OS- and hardware-specific interface to “network d
 
 
 2. OVSDB
-------------
+--------------------------------
 
 2.1. OVSDB Overview
-------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 ovsdb-server cung cấp RPC interfaces cho một hoặc nhiều Open vSwitch databases (OVSDBs). Nó hỗ trợ JSON-RPC client connections qua TCP/IP hoặc Unix domain sockets (active hoặc passive). Mỗi file OVSDB có thể được chỉ định trên dòng lệnh làm cơ sở dữ liệu. Nếu không có gì được chỉ định, mặc định là /etc/openvswitch/conf.db.
 
@@ -242,7 +243,7 @@ CLI:
 - ovsdb-tool: Quản lý DB, ví dụ: tạo / nén / chuyển đổi DB, hiển thị nhật ký DB
 
 2.2. Key Data Structures
-------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ovsdb_schema
 
@@ -255,29 +256,30 @@ CLI:
 - ovsdb_table
 
 2.2.1. OVSDB
----------
+************************************
 
 2.2.2. OVSDB Table
--------------
+************************************
 
 ovsdb core tables:
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-05.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-05.png
 
 Open_vSwitch là root table và luôn luôn chỉ có một dòng duy nhất
 
 2.2.3. Flow Diagram
---------------
+************************************
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-15.png
+
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-32.png
 
 3. kernel module (datapath)
--------------
+---------------------------------
 
 3.1. Overview
-------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-32.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-32.png
 
 Datapath là forwarding plane của OVS. Ban đầu nó được triển khai như kernel module. Ngoài datapath được triển khai ở kernel space thì các thành phần khác được triển khai ở user space và có ít phụ thuộc vào nền tảng hệ thống. Điều đó có nghĩa là việc chuyển OVS sang các OS hay platform khác là rất đơn giản (về mặt lý thuyết): chỉ cần triển khai lại phần kernel trên OS hay platform mới
 
@@ -285,20 +287,16 @@ Thực tế các phiên bản gần đây OVS đã có 2 loại datapath để c
 
 Open vSwitch hỗ trợ các datapath khác nhau trên các platform khác nhau:
 
-- Linux upstream:
-datapath được triển khai bởi kernel module được vận chuyển với Linux upstream. Các tính năng dần được đưa vào kernel
+- Linux upstream: datapath được triển khai bởi kernel module được vận chuyển với Linux upstream. Các tính năng dần được đưa vào kernel
 
-- Linux OVS tree:
-datapath được triển khai bởi kernel module được phân phối với OVS source tree 
+- Linux OVS tree: datapath được triển khai bởi kernel module được phân phối với OVS source tree 
 
-- Userspace:
-Còn được gọi là DPDK, dpif-netdev hoặc dummy datapath. Đây là đường dẫn dữ liệu duy nhất hoạt động trên NetBSD và FreeBSD.
+- Userspace: Còn được gọi là DPDK, dpif-netdev hoặc dummy datapath. Đây là đường dẫn dữ liệu duy nhất hoạt động trên NetBSD và FreeBSD.
 
-- Hyper-V:
-Còn được gọi là Windows datapath    
+- Hyper-V: Còn được gọi là Windows datapath    
 
 3.1.1. Kernel datapath
-------------
+**************************
 
 Trên linux, kernel datapath là loại datapath mặc định
 
@@ -316,7 +314,7 @@ Ví dụ lệnh tạo OVS bridge:
                   type: internal
                   
 3.1.2. Userspace Datapath
--------------------
+****************************************
 
 Userspace datapath khác với datapath truyền thống ở chỗ việc chuyển tiếp và xử lý gói tin của nó được thực hiện trong userspace. Trong số đó, netdev-dpdk là một trong những cách triển khai, được hỗ trợ kể từ OVS 2.4.
 
@@ -336,11 +334,10 @@ Kernel module triển khai nhiều datapath (tương tự như bridge), mỗi ch
 
 Khi một gói tin đến vport, kernel module sẽ xử lý nó bằng cách trích xuất flow key của nó và tra cứu nó trong flow table. Nếu có một luồng phù hợp, nó sẽ thực hiện các hành động liên quan. Nếu không trùng khớp, nó sẽ xếp hàng đợi gói đến userspace để xử lý (như một phần của quá trình xử lý, userspace có thể sẽ thiết lập một luồng để xử lý thêm các gói cùng loại hoàn toàn trong kernel).
 
-.. figure:: https://github.com/thang140398/Lab/blob/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-45.png
+.. figure:: https://raw.githubusercontent.com/thang140398/Lab/master/protocol/picture/Screenshot%20from%202020-10-21%2018-46-45.png
 
 3.2. Key Data Structures
---------------
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - datapath - flow-based packet forwarding/swithcing module
 
 - flow
@@ -352,7 +349,7 @@ Khi một gói tin đến vport, kernel module sẽ xử lý nó bằng cách tr
 - vport
 
 3.3. vport
-------
+~~~~~~~~~~~~~~~~
 
 Các kiểu:
 

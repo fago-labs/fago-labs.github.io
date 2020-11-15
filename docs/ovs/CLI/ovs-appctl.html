@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovsdb-client: Open vSwitch database JSON-RPC client" href="ovsdb-client.html" />
+    <link rel="prev" title="CLI" href="cli.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,28 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#targets">Targets:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-commands">Common commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,7 +162,11 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">ovs-appctl</span></code> - truy vấn và điều khiển Open vSwitch daemon</li>
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
+      <li>ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -160,16 +186,17 @@
            <div itemprop="articleBody">
             
   <div class="section" id="ovs-appctl-truy-van-va-dieu-khien-open-vswitch-daemon">
-<h1><code class="docutils literal notranslate"><span class="pre">ovs-appctl</span></code> - truy vấn và điều khiển Open vSwitch daemon<a class="headerlink" href="#ovs-appctl-truy-van-va-dieu-khien-open-vswitch-daemon" title="Permalink to this headline">¶</a></h1>
+<h1>ovs-appctl - truy vấn và điều khiển Open vSwitch daemon<a class="headerlink" href="#ovs-appctl-truy-van-va-dieu-khien-open-vswitch-daemon" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
-<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<h2>Cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ovs-appctl</span> <span class="pre">[--target=target</span> <span class="pre">|</span> <span class="pre">-t</span> <span class="pre">target]</span> <span class="pre">command</span> <span class="pre">[arg...]</span></code></p>
+</div>
 <div class="section" id="targets">
-<h3>Targets:<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+<h2>Targets:<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--target=TARGET</span></code> - pidfile or socket to contact</p>
 </div>
 <div class="section" id="common-commands">
-<h3>Common commands:<a class="headerlink" href="#common-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Common commands:<a class="headerlink" href="#common-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">help</span></code>          -     những lệnh hỗ trợ với mục tiêu</p>
 <p><code class="docutils literal notranslate"><span class="pre">version</span></code>        -    hiện phiên bản của mục tiêu</p>
 <p><code class="docutils literal notranslate"><span class="pre">vlog/list</span></code>     -     Liệt kê các cấp độ ghi nhật ký hiện tại</p>
@@ -180,11 +207,10 @@
 <p><code class="docutils literal notranslate"><span class="pre">vlog/reopen</span></code>  -      tạo chương trình mở lại tệp nhật ký của nó</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--timeout=SECS</span></code>  -   đợi tốt đa SECS giây cho mỗi reponse</p>
 <p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>    -     hiện thông tin hỗ trợ có ích</p>
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>   -  hiển thị thông tin phiên bản ovs-appctl</p>
-</div>
 </div>
 </div>
 
@@ -193,6 +219,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovsdb-client.html" class="btn btn-neutral float-right" title="ovsdb-client: Open vSwitch database JSON-RPC client" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cli.html" class="btn btn-neutral float-left" title="CLI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
