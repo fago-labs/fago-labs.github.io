@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FRRouting Explaination" href="../../frrouting/frrouting.html" />
+    <link rel="prev" title="ovs-ofctl: quản lý OpenFlow switch" href="ovs-ofctl.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,43 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng :</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#open-vswitch-commands">Open vSwitch commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bridge-commands">Bridge commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#port-commands-a-bond-is-considered-to-be-a-single-port-mot-lien-ket-duoc-coi-la-mot-cong-duy-nhat">Port commands (a bond is considered to be a single port - một liên kết được coi là một cổng duy nhất):</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interface-commands-a-bond-consists-of-multiple-interfaces-mot-lien-ket-bao-gom-nhieu-giao-dien">Interface commands (a bond consists of multiple interfaces - một liên kết bao gồm nhiều giao diện):</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controller-commands">Controller commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manager-commands">Manager commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-commands">SSL commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auto-attach-commands">Auto Attach commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#switch-commands">Switch commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-commands">Database commands:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">Options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-formatting-options">Output formatting options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-options">Logging options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#active-database-connection-methods">Active database connection methods:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#passive-database-connection-methods">Passive database connection methods:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pki-configuration-required-to-use-ssl">PKI configuration (required to use SSL):</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssl-options">SSL options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,7 +177,11 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">ovs-vsctl</span></code> : truy vấn và cấu hình ovs-vswitchd</li>
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
+      <li>ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -160,20 +201,21 @@
            <div itemprop="articleBody">
             
   <div class="section" id="ovs-vsctl-truy-van-va-cau-hinh-ovs-vswitchd">
-<h1><code class="docutils literal notranslate"><span class="pre">ovs-vsctl</span></code> : truy vấn và cấu hình ovs-vswitchd<a class="headerlink" href="#ovs-vsctl-truy-van-va-cau-hinh-ovs-vswitchd" title="Permalink to this headline">¶</a></h1>
+<h1>ovs-vsctl : truy vấn và cấu hình ovs-vswitchd<a class="headerlink" href="#ovs-vsctl-truy-van-va-cau-hinh-ovs-vswitchd" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
 <h2>Cách sử dụng :<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   ```ovs-vsctl [options] -- [options] command [args] [-- [options] command [args]]...```
 </pre></div>
 </div>
+</div>
 <div class="section" id="open-vswitch-commands">
-<h3>Open vSwitch commands:<a class="headerlink" href="#open-vswitch-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Open vSwitch commands:<a class="headerlink" href="#open-vswitch-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">init</span></code>                 -       khởi tạo database</p>
 <p><code class="docutils literal notranslate"><span class="pre">show</span> </code>              -       hiển thị tổng quan database content</p>
 <p><code class="docutils literal notranslate"><span class="pre">mer-reset</span> </code>         -        reset cấu hình về clean state</p>
 </div>
 <div class="section" id="bridge-commands">
-<h3>Bridge commands:<a class="headerlink" href="#bridge-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Bridge commands:<a class="headerlink" href="#bridge-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add-br</span> <span class="pre">BRIDGE</span> </code>        -     tạo bridge mới có tên BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">add-br</span> <span class="pre">BRIDGE</span> <span class="pre">PARENT</span> <span class="pre">VLAN</span></code>  - tạo mới fake BRIDGE in PARENT on VLAN</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-br</span> <span class="pre">BRIDGE</span> </code>      -        xóa bridge tên BRIDGE và tất cả những port của nó</p>
@@ -187,7 +229,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">br-get-external-id</span> <span class="pre">BRIDGE</span></code> - liệt kê các cặp key-value trên BRIDGE</p>
 </div>
 <div class="section" id="port-commands-a-bond-is-considered-to-be-a-single-port-mot-lien-ket-duoc-coi-la-mot-cong-duy-nhat">
-<h3>Port commands (a bond is considered to be a single port - một liên kết được coi là một cổng duy nhất):<a class="headerlink" href="#port-commands-a-bond-is-considered-to-be-a-single-port-mot-lien-ket-duoc-coi-la-mot-cong-duy-nhat" title="Permalink to this headline">¶</a></h3>
+<h2>Port commands (a bond is considered to be a single port - một liên kết được coi là một cổng duy nhất):<a class="headerlink" href="#port-commands-a-bond-is-considered-to-be-a-single-port-mot-lien-ket-duoc-coi-la-mot-cong-duy-nhat" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">list-ports</span> <span class="pre">BRIDGE</span></code>      -     liệt kê tên tất cả các port trên bridge có tên BRIDGE</p>
 <p><code class="docutils literal notranslate"> <span class="pre">add-port</span> <span class="pre">BRIDGE</span> <span class="pre">PORT</span></code>  -      thêm network device PORT vào BRIDGE</p>
 <p><code class="docutils literal notranslate"> <span class="pre">add-bond</span> <span class="pre">BRIDGE</span> <span class="pre">PORT</span> <span class="pre">IFACE...</span></code> - thêm bonded port PORT vào BRIDGE từ IFACES</p>
@@ -195,12 +237,12 @@
 <p><code class="docutils literal notranslate"><span class="pre">port-to-br</span> <span class="pre">PORT</span></code>      -       hiện tên bridge chứa PORT</p>
 </div>
 <div class="section" id="interface-commands-a-bond-consists-of-multiple-interfaces-mot-lien-ket-bao-gom-nhieu-giao-dien">
-<h3>Interface commands (a bond consists of multiple interfaces - một liên kết bao gồm nhiều giao diện):<a class="headerlink" href="#interface-commands-a-bond-consists-of-multiple-interfaces-mot-lien-ket-bao-gom-nhieu-giao-dien" title="Permalink to this headline">¶</a></h3>
+<h2>Interface commands (a bond consists of multiple interfaces - một liên kết bao gồm nhiều giao diện):<a class="headerlink" href="#interface-commands-a-bond-consists-of-multiple-interfaces-mot-lien-ket-bao-gom-nhieu-giao-dien" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">list-ifaces</span> <span class="pre">BRIDGE</span></code>    -    hiện tên tất cả interface trên BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">iface-to-br</span> <span class="pre">IFACE</span></code>     -      hiện tên bridge có chứa IFACE</p>
 </div>
 <div class="section" id="controller-commands">
-<h3>Controller commands:<a class="headerlink" href="#controller-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Controller commands:<a class="headerlink" href="#controller-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">get-controller</span> <span class="pre">BRIDGE</span></code>  -    hiện controllers dùng cho BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-controller</span> <span class="pre">BRIDGE</span></code>  -    xóa controllers cho BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">set-controller</span> <span class="pre">BRIDGE</span> <span class="pre">TARGET...</span></code> -  thiết lập controllers cho BRIDGE</p>
@@ -209,29 +251,29 @@
 <p><code class="docutils literal notranslate"><span class="pre">set-fail-mode</span> <span class="pre">BRIDGE</span> <span class="pre">MODE</span></code> - thiết lập fail-mode cho BRIDGE thành MODE</p>
 </div>
 <div class="section" id="manager-commands">
-<h3>Manager commands:<a class="headerlink" href="#manager-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Manager commands:<a class="headerlink" href="#manager-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">get-manager</span></code>       -         hiện managers</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-manager</span></code>      -         xóa managers</p>
 <p><code class="docutils literal notranslate"> <span class="pre">set-manager</span> <span class="pre">TARGET...</span></code>  -    thiết lập danh sách các managers từ TARGET…</p>
 </div>
 <div class="section" id="ssl-commands">
-<h3>SSL commands:<a class="headerlink" href="#ssl-commands" title="Permalink to this headline">¶</a></h3>
+<h2>SSL commands:<a class="headerlink" href="#ssl-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">get-ssl</span> </code>       -             hiện cấu hình cài đặt SSL</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-ssl</span></code>            -         xóa cấu hình cài đặt SSL</p>
 <p><code class="docutils literal notranslate"><span class="pre">set-ssl</span> <span class="pre">PRIV-KEY</span> <span class="pre">CERT</span> <span class="pre">CA-CERT</span></code> - cài đặt cấu hình SSL</p>
 </div>
 <div class="section" id="auto-attach-commands">
-<h3>Auto Attach commands:<a class="headerlink" href="#auto-attach-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Auto Attach commands:<a class="headerlink" href="#auto-attach-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add-aa-mapping</span> <span class="pre">BRIDGE</span> <span class="pre">I-SID</span> <span class="pre">VLAN</span> </code> -  add Auto Attach mapping to BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-aa-mapping</span> <span class="pre">BRIDGE</span> <span class="pre">I-SID</span> <span class="pre">VLAN</span></code> - delete Auto Attach mapping VLAN from BRIDGE</p>
 <p><code class="docutils literal notranslate"><span class="pre">get-aa-mapping</span> <span class="pre">BRIDGE</span></code>         -     get Auto Attach mappings from BRIDGE</p>
 </div>
 <div class="section" id="switch-commands">
-<h3>Switch commands:<a class="headerlink" href="#switch-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Switch commands:<a class="headerlink" href="#switch-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">emer-reset</span></code>         -         reset switch về trạng thái tốt nhất đã biết</p>
 </div>
 <div class="section" id="database-commands">
-<h3>Database commands:<a class="headerlink" href="#database-commands" title="Permalink to this headline">¶</a></h3>
+<h2>Database commands:<a class="headerlink" href="#database-commands" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">TBL</span> <span class="pre">[REC]</span></code>        -      liệt kê RECord (hoặc tất cả records) trong TBL</p>
 <p><code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">TBL</span> <span class="pre">CONDITION...</span></code>   -    liệt kê records thỏa mãn CONDITION trong TBL</p>
 <p><code class="docutils literal notranslate"><span class="pre">get</span> <span class="pre">TBL</span> <span class="pre">REC</span> <span class="pre">COL[:KEY]</span></code>   -    hiện giá trị cột của RECord trong TBL</p>
@@ -245,7 +287,7 @@
 <p>** Các lệnh cơ sở dữ liệu tiềm ẩn không an toàn yêu cầu tùy chọn –force. **</p>
 </div>
 <div class="section" id="options">
-<h3>Options:<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
+<h2>Options:<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--db=DATABASE</span> </code>     -         kết nối tới DATABASE                 (mặc định: unix:/ovs/var/run/openvswitch/db.sock)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--no-wait</span> </code>         -         không đợi ovs-vswitchd cấu hình lại</p>
 <p><code class="docutils literal notranslate"><span class="pre">--retry</span></code>          -           luôn cố gắng kết nối đến máy chỉ</p>
@@ -254,7 +296,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">--oneline</span></code>        -           in chính xác một dòng đầu ra cho mỗi lệnh</p>
 </div>
 <div class="section" id="output-formatting-options">
-<h3>Output formatting options:<a class="headerlink" href="#output-formatting-options" title="Permalink to this headline">¶</a></h3>
+<h2>Output formatting options:<a class="headerlink" href="#output-formatting-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--format=FORMAT</span></code>    -     đặt định dạng output là FORMAT            (“table”, “html”, “csv”, or “json”)</p>
 <p><code class="docutils literal notranslate"> <span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--data=FORMAT</span></code>     -      đặt định dạng table cell output là     FORMAT (“string”, “bare”, or “json”)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--no-headings</span></code>        -       bỏ qua hàng tiêu đề bảng</p>
@@ -262,7 +304,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">--bare</span> </code>          -           tương đương với “–format=list –data=bare –no-headings”</p>
 </div>
 <div class="section" id="logging-options">
-<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<h2>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code>  -  đặt logging levels</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>     -       đặt mức độ chi tiết tối đa</p>
 <p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>  -      cho phép ghi log vào FILE               (mặc định: /ovs/var/log/openvswitch/ovs-vsctl.log)</p>
@@ -270,33 +312,32 @@
 <p><code class="docutils literal notranslate"><span class="pre">--no-syslog</span> </code>    -        tương đương với –verbose=vsctl:syslog:warn</p>
 </div>
 <div class="section" id="active-database-connection-methods">
-<h3>Active database connection methods:<a class="headerlink" href="#active-database-connection-methods" title="Permalink to this headline">¶</a></h3>
+<h2>Active database connection methods:<a class="headerlink" href="#active-database-connection-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">tcp:IP:PORT</span></code>      -       PORT at remote IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">ssl:IP:PORT</span></code>      -       SSL PORT at remote IP</p>
 <p><code class="docutils literal notranslate"> <span class="pre">unix:FILE</span></code>         -      Unix domain socket named FILE</p>
 </div>
 <div class="section" id="passive-database-connection-methods">
-<h3>Passive database connection methods:<a class="headerlink" href="#passive-database-connection-methods" title="Permalink to this headline">¶</a></h3>
+<h2>Passive database connection methods:<a class="headerlink" href="#passive-database-connection-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ptcp:PORT[:IP]</span></code>    -      listen to TCP PORT on IP</p>
 <p><code class="docutils literal notranslate"> <span class="pre">pssl:PORT[:IP]</span></code>      -    listen for SSL on PORT on IP</p>
 <p><code class="docutils literal notranslate"><span class="pre">punix:FILE</span> </code>       -      listen on Unix domain socket FILE</p>
 </div>
 <div class="section" id="pki-configuration-required-to-use-ssl">
-<h3>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h3>
+<h2>PKI configuration (required to use SSL):<a class="headerlink" href="#pki-configuration-required-to-use-ssl" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"> <span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--private-key=FILE</span></code> - file with private key</p>
 <p><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--certificate=FILE</span></code> - file with certificate for private key</p>
 <p><code class="docutils literal notranslate"> <span class="pre">-C</span></code>, <code class="docutils literal notranslate"><span class="pre">--ca-cert=FILE</span> </code>   -  file with peer CA certificate</p>
 </div>
 <div class="section" id="ssl-options">
-<h3>SSL options:<a class="headerlink" href="#ssl-options" title="Permalink to this headline">¶</a></h3>
+<h2>SSL options:<a class="headerlink" href="#ssl-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--ssl-protocols=PROTOS</span></code> - danh sách SSL protocols để enable</p>
 <p><code class="docutils literal notranslate"><span class="pre">--ssl-ciphers=CIPHERS</span></code> -  danh sách SSL ciphers để enable</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"> <span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span> </code>       -          hiển thị hướng dẫn</p>
 <p><code class="docutils literal notranslate"> <span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span> </code>    -         hiển thị thông tin phiên bản</p>
-</div>
 </div>
 </div>
 
@@ -305,6 +346,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../frrouting/frrouting.html" class="btn btn-neutral float-right" title="FRRouting Explaination" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ovs-ofctl.html" class="btn btn-neutral float-left" title="ovs-ofctl: quản lý OpenFlow switch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

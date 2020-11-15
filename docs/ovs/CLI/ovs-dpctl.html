@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovs-ofctl: quản lý OpenFlow switch" href="ovs-ofctl.html" />
+    <link rel="prev" title="ovsdb-tool: quản lý Open vSwitch database" href="ovsdb-tool.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,31 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-tool.html">ovsdb-tool: quản lý Open vSwitch database</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovs-dpctl: quản lý Open vSwitch datapath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command">Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-options">Logging options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options-for-show-and-mod-flow">Options for show and mod-flow:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options-for-dump-flows">Options for dump-flows:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options-for-mod-flow">Options for mod-flow:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,6 +165,10 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
       <li>ovs-dpctl: quản lý Open vSwitch datapath</li>
     
     
@@ -162,10 +191,11 @@
   <div class="section" id="ovs-dpctl-quan-ly-open-vswitch-datapath">
 <h1>ovs-dpctl: quản lý Open vSwitch datapath<a class="headerlink" href="#ovs-dpctl-quan-ly-open-vswitch-datapath" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
-<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<h2>Cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ovs-dpctl</span> <span class="pre">[options]</span> <span class="pre">command</span> <span class="pre">[switch]</span> <span class="pre">[args...]</span></code></p>
+</div>
 <div class="section" id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h2>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add-dp</span> <span class="pre">DP</span> <span class="pre">[IFACE...]</span></code>   -  thêm mới datapath DP (with IFACEs)</p>
 <p><code class="docutils literal notranslate"><span class="pre">del-dp</span> <span class="pre">DP</span></code>            -    xóa local datapath DP</p>
 <p><code class="docutils literal notranslate"><span class="pre">add-if</span> <span class="pre">DP</span> <span class="pre">IFACE...</span> </code>  -   thêm mỗi IFACE như là port trên DP</p>
@@ -190,7 +220,7 @@ For COMMAND dump-flows, add-flow, mod-flow, del-flow and
 del-flows, DP is optional if there is only one datapath.</em></p>
 </div>
 <div class="section" id="logging-options">
-<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<h2>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  set logging levels</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>      -      set maximum verbosity level</p>
 <p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>   -     enable logging to specified FILE      (default: /var/log/openvswitch/ovs-dpctl.log)</p>
@@ -198,26 +228,25 @@ del-flows, DP is optional if there is only one datapath.</em></p>
 <p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> - also send syslog msgs to HOST:PORT via UDP</p>
 </div>
 <div class="section" id="options-for-show-and-mod-flow">
-<h3>Options for show and mod-flow:<a class="headerlink" href="#options-for-show-and-mod-flow" title="Permalink to this headline">¶</a></h3>
+<h2>Options for show and mod-flow:<a class="headerlink" href="#options-for-show-and-mod-flow" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-s</span></code>,  <code class="docutils literal notranslate"><span class="pre">--statistics</span></code>     -     hiện số liệu thống kê cho port hoặc flow</p>
 </div>
 <div class="section" id="options-for-dump-flows">
-<h3>Options for dump-flows:<a class="headerlink" href="#options-for-dump-flows" title="Permalink to this headline">¶</a></h3>
+<h2>Options for dump-flows:<a class="headerlink" href="#options-for-dump-flows" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--more</span></code>           -       increase verbosity of output</p>
 <p><code class="docutils literal notranslate"><span class="pre">--names</span></code>            -         use port names in output</p>
 </div>
 <div class="section" id="options-for-mod-flow">
-<h3>Options for mod-flow:<a class="headerlink" href="#options-for-mod-flow" title="Permalink to this headline">¶</a></h3>
+<h2>Options for mod-flow:<a class="headerlink" href="#options-for-mod-flow" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--may-create</span></code>        -        tạo flow nếu chưa tồn tại</p>
 <p><code class="docutils literal notranslate"><span class="pre">--read-only</span></code>        -         không chạy lệnh read/write</p>
 <p><code class="docutils literal notranslate"><span class="pre">--clear</span></code>            -        đặt lại số liệu thống kê hiện có về không</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--timeout=SECS</span></code>    -      give up after SECS seconds</p>
 <p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code>            -      display this help message</p>
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>          -     display version information</p>
-</div>
 </div>
 </div>
 
@@ -226,6 +255,15 @@ del-flows, DP is optional if there is only one datapath.</em></p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovs-ofctl.html" class="btn btn-neutral float-right" title="ovs-ofctl: quản lý OpenFlow switch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ovsdb-tool.html" class="btn btn-neutral float-left" title="ovsdb-tool: quản lý Open vSwitch database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

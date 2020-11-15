@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ovs-dpctl: quản lý Open vSwitch datapath" href="ovs-dpctl.html" />
+    <link rel="prev" title="ovsdb-client: Open vSwitch database JSON-RPC client" href="ovsdb-client.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,8 +82,28 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ovs.html">OVS Explaination</a></li>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../ovs.html">OVS Explaination</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../intro.html">Cài đặt OVS từ source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ovs-architecture.html">Kiến trúc OVS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch24port.html">Switch 24 port</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="cli.html">CLI</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ovs-appctl.html">ovs-appctl - truy vấn và điều khiển Open vSwitch daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovsdb-client.html">ovsdb-client: Open vSwitch database JSON-RPC client</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ovsdb-tool: quản lý Open vSwitch database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cach-su-dung">Cách sử dụng:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command">Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-options">Logging options:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-options">Other options:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-dpctl.html">ovs-dpctl: quản lý Open vSwitch datapath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-ofctl.html">ovs-ofctl: quản lý OpenFlow switch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ovs-vsctl.html">ovs-vsctl : truy vấn và cấu hình ovs-vswitchd</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../frrouting/frrouting.html">FRRouting Explaination</a></li>
@@ -140,6 +162,10 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
+          <li><a href="../ovs.html">OVS Explaination</a> &raquo;</li>
+        
+          <li><a href="cli.html">CLI</a> &raquo;</li>
+        
       <li>ovsdb-tool: quản lý Open vSwitch database</li>
     
     
@@ -162,9 +188,10 @@
   <div class="section" id="ovsdb-tool-quan-ly-open-vswitch-database">
 <h1>ovsdb-tool: quản lý Open vSwitch database<a class="headerlink" href="#ovsdb-tool-quan-ly-open-vswitch-database" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cach-su-dung">
-<h2>cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+<h2>Cách sử dụng:<a class="headerlink" href="#cach-su-dung" title="Permalink to this headline">¶</a></h2>
+</div>
 <div class="section" id="command">
-<h3>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h3>
+<h2>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">ovsdb-tool</span> <span class="pre">[OPTIONS]</span> <span class="pre">COMMAND</span> <span class="pre">[ARG...]</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">[DB</span> <span class="pre">[SCHEMA]]</span></code> -  tạo DB với SCHEMA đã cho</p>
 <p><code class="docutils literal notranslate"><span class="pre">create-cluster</span> <span class="pre">DB</span> <span class="pre">CONTENTS</span> <span class="pre">LOCAL</span></code>      -     tạo clustered DB với CONTENTS  và LOCAL address đã cho</p>
@@ -190,7 +217,7 @@
 <p><em>The default SCHEMA is /usr/share/openvswitch/vswitch.ovsschema.</em></p>
 </div>
 <div class="section" id="logging-options">
-<h3>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h3>
+<h2>Logging options:<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-vSPEC</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose=SPEC</span></code> -  set logging levels</p>
 <p><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code>      -      set maximum verbosity level</p>
 <p><code class="docutils literal notranslate"><span class="pre">--log-file[=FILE]</span></code>   -     enable logging to specified FILE     (default: /var/log/openvswitch/ovsdb-tool.log)</p>
@@ -198,12 +225,11 @@
 <p><code class="docutils literal notranslate"><span class="pre">--syslog-target=HOST:PORT</span></code> - also send syslog msgs to HOST:PORT via UDP</p>
 </div>
 <div class="section" id="other-options">
-<h3>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<h2>Other options:<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--more</span></code>          -        increase show-log verbosity</p>
 <p><code class="docutils literal notranslate"><span class="pre">--rbac-role=ROLE</span> </code>      -     RBAC role for transact and query commands</p>
 <p><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span> </code>         -       display this help message</p>
 <p><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code>        -       display version information</p>
-</div>
 </div>
 </div>
 
@@ -212,6 +238,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ovs-dpctl.html" class="btn btn-neutral float-right" title="ovs-dpctl: quản lý Open vSwitch datapath" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ovsdb-client.html" class="btn btn-neutral float-left" title="ovsdb-client: Open vSwitch database JSON-RPC client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
