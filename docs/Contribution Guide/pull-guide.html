@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hướng dẫn pull request cho github của blog page FAGO.LABS &mdash; fago-labs-blog v1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Contribution" href="contribution.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> fago-labs-blog
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ovs/ovs.html">OVS Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../frrouting/frrouting.html">FRRouting Explaination</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../web security/acunetix.html">Acunetix</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../k8s/k8s.html">Kubernetes</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Openstack/openstack.html">Openstack</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contribution.html">Contribution</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hướng dẫn pull request cho github của blog page FAGO.LABS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fork-repository-tren-github">Fork repository trên Github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clone-ve-may">Clone về máy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tao-file-html-bang-sphinx">Tạo file HTML bằng Sphinx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tao-push-len-github">Tạo push lên github</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">fago-labs-blog</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="contribution.html">Contribution</a> &raquo;</li>
+        
+      <li>Hướng dẫn pull request cho github của blog page FAGO.LABS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Contribution Guide/pull-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="huong-dan-pull-request-cho-github-cua-blog-page-fago-labs">
+<h1>Hướng dẫn pull request cho github của blog page FAGO.LABS<a class="headerlink" href="#huong-dan-pull-request-cho-github-cua-blog-page-fago-labs" title="Permalink to this headline">¶</a></h1>
+<p><em>Địa chỉ github: https://github.com/fago-labs/fago-labs.github.io</em></p>
+<div class="section" id="fork-repository-tren-github">
+<h2>Fork repository trên Github<a class="headerlink" href="#fork-repository-tren-github" title="Permalink to this headline">¶</a></h2>
+<p>Tạo một bản copy của repository như sau. Truy cập vào repository theo link trên. Click vào button <strong>Fork</strong> ở góc phải màn hình</p>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-12-03.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-12-03.png" />
+</div>
+<p>Quá trình fork sẽ được thực hiện và Kết quả là đã fork thành công repository về tài khoản của mình</p>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-12-29.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-12-29.png" />
+</div>
+</div>
+<div class="section" id="clone-ve-may">
+<h2>Clone về máy<a class="headerlink" href="#clone-ve-may" title="Permalink to this headline">¶</a></h2>
+<p>Ví dụ</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">thang140398</span><span class="o">/</span><span class="n">fago</span><span class="o">-</span><span class="n">labs</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tao-file-html-bang-sphinx">
+<h2>Tạo file HTML bằng Sphinx<a class="headerlink" href="#tao-file-html-bang-sphinx" title="Permalink to this headline">¶</a></h2>
+<p><em>Cần cài đặt Sphinx trước</em></p>
+<p>cd và folder fago-labs.github.io</p>
+<p>Các file .rst, .md sẽ để trong folder <strong>source</strong></p>
+<p>Nếu cần thêm các mục thì thêm vào file <strong>index.rst</strong></p>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-32-14.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-32-14.png" />
+</div>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-27-28.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-27-28.png" />
+</div>
+<p>Dùng lệnh sau để tạo file HTML</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">autobuild</span> <span class="n">source</span><span class="o">/</span> <span class="n">docs</span><span class="o">/</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/125041655_417251322606927_2753747689888614615_n.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/125041655_417251322606927_2753747689888614615_n.png" />
+</div>
+<p>Xem trang HTML vừa tạo qua địa chỉ local : 127.0.0.1</p>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/125431154_784353335455051_3716113982632786603_n.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/125431154_784353335455051_3716113982632786603_n.png" />
+</div>
+</div>
+<div class="section" id="tao-push-len-github">
+<h2>Tạo push lên github<a class="headerlink" href="#tao-push-len-github" title="Permalink to this headline">¶</a></h2>
+<p>Ví dụ</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="nb">set</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">thang140398</span><span class="o">/</span><span class="n">fago</span><span class="o">-</span><span class="n">labs</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>
+
+<span class="n">git</span> <span class="n">status</span>
+
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Thang update ovs&quot;</span>
+
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+<p>Tạo push request như sau</p>
+<ul class="simple">
+<li>click vào pull request</li>
+</ul>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-38-15.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-38-15.png" />
+</div>
+<ul class="simple">
+<li>click vào create</li>
+</ul>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-39-31.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-39-31.png" />
+</div>
+<ul class="simple">
+<li>Đặt tên và click vào create</li>
+</ul>
+<div class="figure">
+<img alt="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-40-10.png" src="https://raw.githubusercontent.com/thang140398/Lab/master/IMG_for_GuildPull/Screenshot%20from%202020-11-15%2017-40-10.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="contribution.html" class="btn btn-neutral float-left" title="Contribution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, fago.labs
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

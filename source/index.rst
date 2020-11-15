@@ -54,3 +54,11 @@ Openstack
    :maxdepth: 2
 
    Openstack/openstack
+
+Contribution
+==================
+
+.. toctree::
+   :maxdepth: 2
+
+   Contribution Guide/contribution
